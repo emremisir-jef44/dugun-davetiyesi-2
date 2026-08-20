@@ -21,7 +21,8 @@
             --acik-krem: #ffffff; 
             --altin: #c1a167; 
             --koyu-altin: #a38550;
-            --yazi: #4a3e35; 
+            /* YENİ ANA TEMA RENGİ: Tatlı ve Asil Yeşil */
+            --yazi: #4e7354; 
             --gri: #7d7268;
             --hata: #a33a3a;
             --font-isim: 'Pinyon Script', cursive; 
@@ -46,7 +47,7 @@
         .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; background: radial-gradient(circle at top left, #ffffff, transparent 60%), var(--krem); transition: opacity 0.8s ease, visibility 0.8s ease; }
         .acilis-ekrani.gizli { opacity: 0; visibility: hidden; pointer-events: none; }
         
-        .karsilama-karti { width: min(430px, 100%); padding: 55px 35px; text-align: center; background-color: rgba(252, 250, 247, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 12px; box-shadow: 0 30px 60px rgba(74, 62, 53, 0.1); }
+        .karsilama-karti { width: min(430px, 100%); padding: 55px 35px; text-align: center; background-color: rgba(252, 250, 247, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 12px; box-shadow: 0 30px 60px rgba(78, 115, 84, 0.15); }
         .monogram { font-family: var(--font-isim); font-size: 65px; color: var(--altin); margin-bottom: 5px; line-height: 1; }
         .monogram-amp { font-family: var(--font-baslik); font-size: 38px; color: var(--yazi); font-style: normal; }
         .karsilama-tarih { font-size: 11px; font-weight: 500; letter-spacing: 5px; color: var(--gri); text-transform: uppercase; margin-bottom: 20px; font-family: var(--font-metin); }
@@ -67,22 +68,22 @@
         /* SENKRONİZE EDİLMİŞ VİDEO KAPAK BÖLÜMÜ */
         .kapak { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 70px 20px; text-align: center; color: var(--yazi); }
         
-        /* ZOOM İPTAL - EKRANA TAM OTURAN VİDEO */
+        /* EKRANA TAM OTURAN VİDEO */
         .arkaplan-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
         .video-overlay { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.2); z-index: 1; } 
         
         .kapak-icerik { position: relative; z-index: 2; width: min(1000px, 100%); height: 100vh; display: flex; align-items: center; justify-content: center; }
         
-        /* SAHNELER (VİDEO İLE SENKRON) */
+        /* SAHNELER */
         .sahne { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateY(15px); }
         .sahne.aktif { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-        /* SAHNE 1: SADECE EVLENİYORUZ YAZISI */
-        .sahne-1-icerik { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 20px; color: #4e7354; font-family: var(--font-isim); font-size: 70px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); width: 100%; }
-        .sahne-1-icerik::before, .sahne-1-icerik::after { content: ""; width: 70px; height: 1px; background: linear-gradient(to right, transparent, #4e7354); }
-        .sahne-1-icerik::after { background: linear-gradient(to left, transparent, #4e7354); }
+        /* SAHNE 1: SADECE EVLENİYORUZ YAZISI (Yeni Ayarlarla) */
+        .sahne-1-icerik { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 20px; color: var(--yazi); font-family: var(--font-isim); font-size: 70px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); width: 100%; }
+        .sahne-1-icerik::before, .sahne-1-icerik::after { content: ""; width: 70px; height: 1px; background: linear-gradient(to right, transparent, var(--yazi)); }
+        .sahne-1-icerik::after { background: linear-gradient(to left, transparent, var(--yazi)); }
 
-        /* SAHNE 2: İSİMLER, SAYAÇ VE ADRES (MERKEZLENMİŞ) */
+        /* SAHNE 2: İSİMLER, SAYAÇ VE ADRES */
         .sahne-2-ust-yazi { font-family: var(--font-isim); font-size: 42px; color: var(--yazi); margin-bottom: -15px; text-shadow: 0 2px 15px rgba(255,255,255,1); }
         .kapak h1 { margin: 0; font-family: var(--font-isim); font-size: clamp(80px, 10vw, 130px); font-weight: 400; line-height: 1.1; letter-spacing: 2px; text-shadow: 0 4px 30px rgba(255,255,255,1); }
         .kapak h1 .ampersand { display: inline-block; margin: 0 0.1em; font-family: var(--font-baslik); font-size: 0.55em; color: var(--altin); font-style: normal; font-weight: 400; transform: translateY(-0.15em); }
@@ -90,7 +91,7 @@
         
         /* KÜÇÜLTÜLMÜŞ SAYAÇ */
         .geri-sayim { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; max-width: 380px; margin: 0 auto 25px auto; }
-        .sayac-kutusu { padding: 12px 5px; background-color: rgba(255, 255, 255, 0.85); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 10px; backdrop-filter: blur(8px); color: var(--yazi); box-shadow: 0 10px 25px rgba(74, 62, 53, 0.08); }
+        .sayac-kutusu { padding: 12px 5px; background-color: rgba(255, 255, 255, 0.85); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 10px; backdrop-filter: blur(8px); color: var(--yazi); box-shadow: 0 10px 25px rgba(78, 115, 84, 0.1); }
         .sayac-kutusu strong { display: block; font-family: var(--font-baslik); font-size: 24px; font-weight: 500; line-height: 1; }
         .sayac-kutusu span { display: block; margin-top: 5px; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--gri); font-weight: 500; }
 
@@ -105,10 +106,10 @@
         .zaman-cizgisi { display: flex; overflow-x: auto; gap: 20px; padding: 10px 20px 40px 20px; margin: 0; -ms-overflow-style: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .zaman-cizgisi::-webkit-scrollbar { display: none; }
         .zaman-adimi { flex: 0 0 290px; display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
-        .polaroid-kart { width: 100%; background: white; padding: 14px 14px 25px; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 4px; box-shadow: 0 15px 35px rgba(74, 62, 53, 0.08); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .polaroid-kart { width: 100%; background: white; padding: 14px 14px 25px; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 4px; box-shadow: 0 15px 35px rgba(78, 115, 84, 0.1); transition: transform 0.4s ease, box-shadow 0.4s ease; }
         .zaman-adimi:nth-child(odd) .polaroid-kart { transform: rotate(-1.5deg); }
         .zaman-adimi:nth-child(even) .polaroid-kart { transform: rotate(1.5deg); }
-        .polaroid-kart:hover { transform: translateY(-7px) rotate(0deg) !important; box-shadow: 0 25px 50px rgba(74, 62, 53, 0.12); }
+        .polaroid-kart:hover { transform: translateY(-7px) rotate(0deg) !important; box-shadow: 0 25px 50px rgba(78, 115, 84, 0.15); }
         .polaroid-fotograf { overflow: hidden; width: 100%; aspect-ratio: 4 / 5; background: #f0f0f0; }
         .polaroid-fotograf img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.6s ease; }
         .polaroid-kart:hover .polaroid-fotograf img { transform: scale(1.04); }
@@ -121,22 +122,22 @@
 
         /* PROGRAM & MEKAN */
         .program-listesi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .program-karti { padding: 35px 20px; text-align: center; background-color: white; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 12px; box-shadow: 0 15px 35px rgba(74, 62, 53, 0.05); transition: transform 0.3s ease; }
+        .program-karti { padding: 35px 20px; text-align: center; background-color: white; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 12px; box-shadow: 0 15px 35px rgba(78, 115, 84, 0.05); transition: transform 0.3s ease; }
         .program-karti:hover { transform: translateY(-5px); }
         .program-karti .program-ikon { display: block; margin-bottom: 10px; font-size: 32px; }
         .program-karti strong { display: block; color: var(--altin); font-size: 22px; font-family: var(--font-baslik); font-weight: 500; }
         .program-karti h3 { margin: 8px 0 0; font-family: var(--font-baslik); color: var(--yazi); font-weight: 500; font-size: 18px; letter-spacing: 1px; }
 
-        .mekan-karti { max-width: 750px; margin: auto; padding: 50px 30px; text-align: center; color: var(--yazi); background-color: white; border-radius: 16px; border: 1px solid rgba(193, 161, 103, 0.25); box-shadow: 0 20px 50px rgba(74, 62, 53, 0.08); }
+        .mekan-karti { max-width: 750px; margin: auto; padding: 50px 30px; text-align: center; color: var(--yazi); background-color: white; border-radius: 16px; border: 1px solid rgba(193, 161, 103, 0.25); box-shadow: 0 20px 50px rgba(78, 115, 84, 0.08); }
         .mekan-karti .mekan-ikon { font-size: 42px; margin-bottom: 10px; }
         .mekan-karti h3 { margin: 10px 0; font-family: var(--font-baslik); font-size: 32px; font-weight: 500; letter-spacing: 1px; }
         .mekan-karti .buton { margin-top: 20px; }
 
         /* DAVETLİ KAMERASI */
-        .kamera-karti { background-color: white; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 16px; max-width: 500px; margin: 0 auto; box-shadow: 0 20px 50px rgba(74, 62, 53, 0.08); overflow: hidden; }
+        .kamera-karti { background-color: white; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 16px; max-width: 500px; margin: 0 auto; box-shadow: 0 20px 50px rgba(78, 115, 84, 0.08); overflow: hidden; }
         
         /* KATILIM FORMU */
-        .form-karti { max-width: 720px; margin: auto; padding: 45px; background-color: white; border-radius: 16px; border: 1px solid rgba(193, 161, 103, 0.2); box-shadow: 0 20px 50px rgba(74, 62, 53, 0.06); }
+        .form-karti { max-width: 720px; margin: auto; padding: 45px; background-color: white; border-radius: 16px; border: 1px solid rgba(193, 161, 103, 0.2); box-shadow: 0 20px 50px rgba(78, 115, 84, 0.08); }
         .form-satiri { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .form-alani { margin-bottom: 22px; }
         .form-alani label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--yazi); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
@@ -144,7 +145,7 @@
         .form-alani input:focus, .form-alani select:focus, .form-alani textarea:focus { outline: none; border-color: var(--altin); background-color: white; box-shadow: 0 0 0 3px rgba(193, 161, 103, 0.15); }
         .form-alani textarea { min-height: 120px; resize: vertical; }
         .form-mesaji { margin: 18px 0 0; font-weight: 500; }
-        .form-mesaji.basarili { color: #506152; }
+        .form-mesaji.basarili { color: var(--yazi); }
         .form-mesaji.hatali { color: var(--hata); }
         .gizli-alan { position: absolute; left: -9999px; }
 
@@ -157,7 +158,7 @@
             .kapak { padding: 0; }
             .sahne { padding: 20px; }
             
-            /* Saniye 1: Evleniyoruz Tepede */
+            /* Saniye 1: Evleniyoruz Tepede ve Büyük */
             .sahne-1-icerik { font-size: 55px; gap: 15px; top: 20%; }
             .sahne-1-icerik::before, .sahne-1-icerik::after { width: 45px; }
             
@@ -229,7 +230,7 @@
         
         <div class="kapak-icerik">
             
-            <!-- SAHNE 1: A Z Göründüğünde Çıkan "Evleniyoruz" Yazısı (En Tepede) -->
+            <!-- SAHNE 1: A Z Göründüğünde Çıkan "Evleniyoruz" Yazısı -->
             <div id="sahne1" class="sahne">
                 <div class="sahne-1-icerik">Evleniyoruz</div>
             </div>
@@ -248,7 +249,7 @@
                     <div class="sayac-kutusu"><strong id="saniye">00</strong><span>Saniye</span></div>
                 </div>
 
-                <!-- Sadece Adres Butonu Kaldı -->
+                <!-- Sadece Adres Butonu -->
                 <div class="buton-grubu">
                     <a class="buton" href="#mekan">Adres 📍</a>
                 </div>
@@ -480,8 +481,8 @@
 
         // 🌟 VİDEO VE YAZI SENKRONİZASYONU 🌟
         const arkaplanVideo = document.getElementById('arkaplanVideo');
-        const sahne1 = document.getElementById('sahne1'); // A Z tepesinde Evleniyoruz
-        const sahne2 = document.getElementById('sahne2'); // Merkezdeki Asıl Bilgiler
+        const sahne1 = document.getElementById('sahne1'); 
+        const sahne2 = document.getElementById('sahne2'); 
 
         // DİKKAT: BURADAKİ SANİYELERİ KENDİ VİDEONA GÖRE AYARLA!
         const azGelisSaniyesi = 1.0; 
