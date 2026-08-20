@@ -21,7 +21,7 @@
             --acik-krem: #ffffff; 
             --altin: #c1a167; 
             --koyu-altin: #a38550;
-            --yazi: #4e7354; 
+            --yazi: #4e7354; /* Asil Yeşil */
             --gri: #7d7268;
             --hata: #a33a3a;
             --font-isim: 'Pinyon Script', cursive; 
@@ -42,18 +42,17 @@
         }
         body.kilitli { overflow: hidden; }
 
-        /* YENİ ZARF AÇILIŞ EKRANI */
-        .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: #000; transition: opacity 1.5s ease, visibility 1.5s ease; cursor: pointer; }
+        /* YENİ ZARF AÇILIŞ EKRANI (Siyah Ekran Düzeltildi) */
+        .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: #f7f3ec; /* Video yüklenmeden önce zarfın rengine yakın bir ton */ transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer; }
         .acilis-ekrani.gizli { opacity: 0; visibility: hidden; pointer-events: none; }
         
         .zarf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .zarf-video-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.2); transition: opacity 0.5s ease; }
         
-        .zarfi-ac-yazisi { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); font-family: var(--font-baslik); font-size: 16px; font-weight: 500; letter-spacing: 5px; color: white; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.8); z-index: 2; animation: nefes 2s infinite ease-in-out; pointer-events: none; }
+        .zarfi-ac-yazisi { position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); font-family: var(--font-baslik); font-size: 18px; font-weight: 600; letter-spacing: 4px; color: var(--yazi); text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 255, 255, 0.9); z-index: 2; animation: nefes 2s infinite ease-in-out; pointer-events: none; white-space: nowrap; background: rgba(255,255,255,0.4); padding: 10px 25px; border-radius: 50px; backdrop-filter: blur(5px); transition: opacity 0.5s ease; }
         
         @keyframes nefes {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+            50% { transform: translateX(-50%) scale(1.05); opacity: 1; }
         }
 
         /* BUTONLAR */
@@ -62,7 +61,7 @@
         .buton-grubu { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 10px; margin-bottom: 30px; pointer-events: auto; }
         
         /* MÜZİK */
-        .muzik-buton { position: fixed; bottom: 20px; right: 20px; z-index: 999; background-color: var(--altin); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.3s ease, background-color 0.3s ease; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 1s ease; }
+        .muzik-buton { position: fixed; bottom: 20px; right: 20px; z-index: 999; background-color: var(--altin); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; }
         .muzik-buton.aktif { opacity: 1; pointer-events: auto; }
         .muzik-buton:hover { background-color: var(--koyu-altin); transform: scale(1.1); }
         .muzik-buton.caliyor { animation: nabiz 2s infinite; }
@@ -71,7 +70,6 @@
         /* SENKRONİZE EDİLMİŞ VİDEO KAPAK BÖLÜMÜ */
         .kapak { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 70px 20px; text-align: center; color: var(--yazi); }
         
-        /* EKRANA TAM OTURAN VİDEO */
         .arkaplan-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
         .video-overlay { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.2); z-index: 1; } 
         
@@ -161,6 +159,8 @@
             .kapak { padding: 0; }
             .sahne { padding: 20px; }
             
+            .zarfi-ac-yazisi { font-size: 14px; bottom: 10%; }
+            
             .sahne-1-icerik { font-size: 55px; gap: 15px; top: 20%; }
             .sahne-1-icerik::before, .sahne-1-icerik::after { width: 45px; }
             
@@ -209,18 +209,18 @@
 
     <!-- ZARF AÇILIŞ EKRANI -->
     <div class="acilis-ekrani" id="acilisEkrani">
-        <!-- Zarf Videosu Başlangıçta Durdurulmuş Halde -->
-        <video id="zarfVideo" class="zarf-video" playsinline muted>
-            <source src="images/giris-zarf-2.mp4" type="video/mp4">
+        <!-- Zarf Videosu (preload="auto" ve #t=0.001 ilk karenin mobil cihazlarda donuk kalmasını garantiler) -->
+        <video id="zarfVideo" class="zarf-video" playsinline muted preload="auto">
+            <source src="images/giris-zarf-2.mp4#t=0.001" type="video/mp4">
         </video>
-        <div class="zarf-video-overlay" id="zarfOverlay"></div>
-        <div class="zarfi-ac-yazisi" id="zarfYazisi">Zarfı Açmak İçin Dokun</div>
+        
+        <div class="zarfi-ac-yazisi" id="zarfYazisi">Ekrana Tıklayınız</div>
     </div>
 
     <!-- ANA KAPAK (VİDEO VE SENKRONİZE YAZILAR) -->
     <header class="kapak" id="anaKapak">
         <!-- Ana İçerik Arka Plan Videosu -->
-        <video id="arkaplanVideo" muted playsinline loop class="arkaplan-video">
+        <video id="arkaplanVideo" muted playsinline loop class="arkaplan-video" preload="auto">
             <source src="images/arkaplan2.mp4" type="video/mp4">
         </video>
         
@@ -498,23 +498,21 @@
             }
         });
 
-        // 🌟 YENİ ZARF AÇILIŞ MANTIĞI 🌟
+        // 🌟 ZARF AÇILIŞ MANTIĞI 🌟
         const acilisEkrani = document.getElementById("acilisEkrani");
         const zarfVideo = document.getElementById("zarfVideo");
         const zarfYazisi = document.getElementById("zarfYazisi");
-        const zarfOverlay = document.getElementById("zarfOverlay");
         let zarfAcildiMi = false;
 
         acilisEkrani.addEventListener("click", function () {
-            if (zarfAcildiMi) return; // Zaten basıldıysa tekrar çalışmasın
+            if (zarfAcildiMi) return; 
             zarfAcildiMi = true;
             
-            // "Zarfı Açın" yazısını ve overlayi hemen yok et
+            // "Ekrana Tıklayınız" yazısını hemen yok et
             zarfYazisi.style.opacity = "0";
-            zarfOverlay.style.opacity = "0";
             
             // Zarf açılış videosunu başlat
-            zarfVideo.play();
+            zarfVideo.play().catch(e => console.log("Zarf video oynatılamadı:", e));
             
             // Müzik çalmaya başlasın
             muzik.play().then(() => {
@@ -524,7 +522,7 @@
             }).catch(e => console.log("Müzik otomatik başlatılamadı"));
         });
 
-        // Zarf videosu bitince olacaklar (Ana siteye geçiş)
+        // Zarf videosu bitince ana siteye geçiş
         zarfVideo.addEventListener('ended', () => {
             acilisEkrani.classList.add("gizli");
             document.body.classList.remove("kilitli");
