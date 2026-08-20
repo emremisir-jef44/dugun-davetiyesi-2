@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="Abdülsamed & Zeynep | Düğün Davetiyesi">
+    <meta property="og:description" content="Mutluluğumuzu paylaşmak dileğiyle...">
+    <meta property="og:image" content="images/kapak.jpg"> 
+    <meta property="og:type" content="website">
+
+    <title>Abdülsamed & Zeynep | Düğün Davetiyesi</title>
+
+    <!-- Google Fonts (Lüks ve Estetik) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --krem: #fcfaf7; /* Videonun ortasındaki o tertemiz beyaz/krem tonu */
+            --acik-krem: #ffffff; 
+            --altin: #c1a167; /* Videodaki AZ harflerinin altın tonu */
+            --koyu-altin: #a38550;
+            --yazi: #4a3e35; /* Koyu yeşil yerine, videoyla uyumlu lüks acı kahve/bronz tonu */
+            --gri: #7d7268;
+            --hata: #a33a3a;
+            --font-isim: 'Pinyon Script', cursive; 
+            --font-baslik: 'Cinzel', serif; 
+            --font-metin: 'Jost', sans-serif; 
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            margin: 0; 
+            font-family: var(--font-metin); 
+            background: linear-gradient(180deg, #ffffff 0%, #fcfaf7 100%); 
+            color: var(--yazi); 
+            line-height: 1.7; 
+            font-weight: 300; 
+        }
+        body.kilitli { overflow: hidden; }
+
+        /* AÇILIŞ EKRANI */
+        .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; background: radial-gradient(circle at top left, #ffffff, transparent 60%), var(--krem); transition: opacity 0.8s ease, visibility 0.8s ease; }
+        .acilis-ekrani.gizli { opacity: 0; visibility: hidden; pointer-events: none; }
+        
+        .karsilama-karti { width: min(430px, 100%); padding: 55px 35px; text-align: center; background-color: rgba(252, 250, 247, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 12px; box-shadow: 0 30px 60px rgba(74, 62, 53, 0.1); }
+        .monogram { font-family: var(--font-isim); font-size: 65px; color: var(--altin); margin-bottom: 5px; line-height: 1; }
+        .monogram-amp { font-family: var(--font-baslik); font-size: 38px; color: var(--yazi); font-style: normal; }
+        .karsilama-tarih { font-size: 11px; font-weight: 500; letter-spacing: 5px; color: var(--gri); text-transform: uppercase; margin-bottom: 20px; font-family: var(--font-metin); }
+        .karsilama-karti h1 { margin: 0 0 15px; font-family: var(--font-baslik); font-size: 28px; font-weight: 500; color: var(--yazi); letter-spacing: 1px; }
+        .karsilama-karti p { margin: 0 0 30px; color: var(--gri); font-size: 14px; line-height: 1.8; }
+
+        /* BUTONLAR */
+        .buton { display: inline-block; padding: 14px 28px; border: none; border-radius: 999px; background-color: var(--yazi); color: white; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-metin); }
+        .buton:hover { transform: translateY(-2px); background-color: var(--altin); box-shadow: 0 10px 20px rgba(193, 161, 103, 0.25); }
+        .buton-grubu { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 45px; pointer-events: auto; }
+        .buton.seffaf { background-color: transparent; border: 1px solid var(--yazi); color: var(--yazi); }
+        .buton.seffaf:hover { background-color: var(--yazi); color: white; }
+
+        /* MÜZİK */
+        .muzik-buton { position: fixed; bottom: 20px; right: 20px; z-index: 999; background-color: var(--altin); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 24px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.3s ease, background-color 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .muzik-buton:hover { background-color: var(--koyu-altin); transform: scale(1.1); }
+        .muzik-buton.caliyor { animation: nabiz 2s infinite; }
+        @keyframes nabiz { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(193, 161, 103, 0.6); } 70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(193, 161, 103, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(193, 161, 103, 0); } }
+
+        /* SENKRONİZE EDİLMİŞ VİDEO KAPAK BÖLÜMÜ */
+        .kapak { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 70px 20px; text-align: center; color: var(--yazi); }
+        .arkaplan-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover; }
+        /* Videonun kenarındaki güller net görünsün diye overlay'i çok uçuk yaptık */
+        .video-overlay { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); z-index: 1; } 
+        
+        .kapak-icerik { position: relative; z-index: 2; width: min(1000px, 100%); height: 100vh; display: flex; align-items: center; justify-content: center; }
+        
+        /* SAHNELER (VİDEO İLE SENKRON KISIM) */
+        .sahne { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateY(20px); }
+        .sahne.aktif { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+        /* SAHNE 1: Sadece Evleniyoruz Yazısı */
+        .sahne-1-icerik { display: flex; align-items: center; justify-content: center; gap: 20px; color: var(--yazi); font-family: var(--font-isim); font-size: 55px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); }
+        .sahne-1-icerik::before, .sahne-1-icerik::after { content: ""; width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--yazi)); }
+        .sahne-1-icerik::after { background: linear-gradient(to left, transparent, var(--yazi)); }
+
+        /* SAHNE 2: İsimler ve Sayaç (AZ Gittikten Sonra) */
+        .kapak h1 { margin: 0; font-family: var(--font-isim); font-size: clamp(85px, 10vw, 130px); font-weight: 400; line-height: 1.1; letter-spacing: 2px; text-shadow: 0 4px 30px rgba(255,255,255,1); }
+        .kapak h1 .ampersand { display: inline-block; margin: 0 0.1em; font-family: var(--font-baslik); font-size: 0.55em; color: var(--altin); font-style: normal; font-weight: 400; transform: translateY(-0.15em); }
+        
+        .tarih { margin: 15px 0 35px; font-size: 19px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--yazi); text-shadow: 0 2px 15px rgba(255,255,255,1); font-family: var(--font-baslik); }
+        
+        .geri-sayim { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; width: 100%; max-width: 750px; margin: 0 auto; }
+        .sayac-kutusu { padding: 22px 10px; background-color: rgba(255, 255, 255, 0.85); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 12px; backdrop-filter: blur(8px); color: var(--yazi); box-shadow: 0 15px 35px rgba(74, 62, 53, 0.08); }
+        .sayac-kutusu strong { display: block; font-family: var(--font-baslik); font-size: clamp(30px, 5vw, 42px); font-weight: 500; line-height: 1; }
+        .sayac-kutusu span { display: block; margin-top: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gri); font-weight: 500; }
+
+        /* GENEL BÖLÜMLER */
+        .bolum { padding: 100px 20px; overflow: hidden; }
+        .bolum-krem { background-color: var(--krem); border-top: 1px solid rgba(193, 161, 103, 0.15); border-bottom: 1px solid rgba(193, 161, 103, 0.15); }
+        .kapsayici { width: min(1120px, 100%); margin: 0 auto; }
+        .bolum-basligi { margin: 0 0 15px; text-align: center; font-family: var(--font-baslik); font-size: clamp(36px, 5vw, 48px); font-weight: 500; line-height: 1.2; letter-spacing: 2px; color: var(--yazi); }
+        .bolum-aciklama { max-width: 690px; margin: 0 auto 60px; text-align: center; color: var(--gri); line-height: 1.9; font-size: 15px; }
+
+        /* YATAY KAYDIRMALI HİKAYEMİZ (Serbest Dinamik Kaydırma) */
+        .zaman-cizgisi { display: flex; overflow-x: auto; gap: 20px; padding: 10px 20px 40px 20px; margin: 0; -ms-overflow-style: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .zaman-cizgisi::-webkit-scrollbar { display: none; }
+        
+        .zaman-adimi { flex: 0 0 290px; display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
+        
+        .polaroid-kart { width: 100%; background: white; padding: 14px 14px 25px; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 4px; box-shadow: 0 15px 35px rgba(74, 62, 53, 0.08); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .zaman-adimi:nth-child(odd) .polaroid-kart { transform: rotate(-1.5deg); }
+        .zaman-adimi:nth-child(even) .polaroid-kart { transform: rotate(1.5deg); }
+        .polaroid-kart:hover { transform: translateY(-7px) rotate(0deg) !important; box-shadow: 0 25px 50px rgba(74, 62, 53, 0.12); }
+        
+        .polaroid-fotograf { overflow: hidden; width: 100%; aspect-ratio: 4 / 5; background: #f0f0f0; }
+        .polaroid-fotograf img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.6s ease; }
+        .polaroid-kart:hover .polaroid-fotograf img { transform: scale(1.04); }
+        .polaroid-alt-yazi { padding: 17px 5px 0; text-align: center; font-family: var(--font-isim); font-size: 26px; color: var(--yazi); }
+        
+        .zaman-dugum { position: relative; z-index: 3; width: 45px; height: 45px; border: 3px solid var(--acik-krem); border-radius: 50%; background-color: var(--altin); color: white; font-weight: 500; font-size: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(193, 161, 103, 0.4); font-family: var(--font-baslik); margin-top: -20px; margin-bottom: 15px; }
+        
+        .zaman-bilgi { text-align: center; width: 100%; padding: 0 10px; }
+        .zaman-tarih { display: inline-block; margin-bottom: 12px; padding: 6px 14px; border: 1px solid rgba(193, 161, 103, 0.4); border-radius: 999px; color: var(--altin); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; }
+        .zaman-bilgi h3 { margin: 0 0 12px; font-family: var(--font-baslik); font-size: 28px; line-height: 1.1; color: var(--yazi); font-weight: 500; letter-spacing: 1px; }
+        .zaman-bilgi p { margin: 0; color: var(--gri); line-height: 1.8; font-size: 15px; }
+
+        /* PROGRAM & MEKAN */
+        .program-listesi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .program-karti { padding: 35px 20px; text-align: center; background-color: white; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 12px; box-shadow: 0 15px 35px rgba(74, 62, 53, 0.05); transition: transform 0.3s ease; }
+        .program-karti:hover { transform: translateY(-5px); }
+        .program-karti .program-ikon { display: block; margin-bottom: 10px; font-size: 32px; }
+        .program-karti strong { display: block; color: var(--altin); font-size: 22px; font-family: var(--font-baslik); font-weight: 500; }
+        .program-karti h3 { margin: 8px 0 0; font-family: var(--font-baslik); color: var(--yazi); font-weight: 500; font-size: 18px; letter-spacing: 1px; }
+
+        .mekan-karti { max-width: 750px; margin: auto; padding: 50px 30px; text-align: center; color: var(--yazi); background-color: white; border-radius: 16px; border: 1px solid rgba(193, 161, 103, 0.25); box-shadow: 0 20px 50px rgba(74, 62, 53, 0.08); }
+        .mekan-karti .mekan-ikon { font-size: 42px; margin-bottom: 10px; }
+        .mekan-karti h3 { margin: 10px 0; font-family: var(--font-baslik); font-size: 32px; font-weight: 500; letter-spacing: 1px; }
+        .mekan-karti .buton { margin-top: 20px; }
+        
+        /* FORM */
+        .form-karti { max-width: 720px; margin: auto; padding: 45px; background-color: white; border-radius: 16px; border: 1px solid rgba(193, 161, 103, 0.2); box-shadow: 0 20px 50px rgba(74, 62, 53, 0.06); }
+        .form-satiri { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-alani { margin-bottom: 22px; }
+        .form-alani label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--yazi); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-alani input, .form-alani select, .form-alani textarea { width: 100%; padding: 15px; border: 1px solid #e3dbd1; border-radius: 8px; font: inherit; background-color: #fdfcf9; transition: all 0.3s ease; }
+        .form-alani input:focus, .form-alani select:focus, .form-alani textarea:focus { outline: none; border-color: var(--altin); background-color: white; box-shadow: 0 0 0 3px rgba(193, 161, 103, 0.15); }
+        .form-alani textarea { min-height: 120px; resize: vertical; }
+        .form-mesaji { margin: 18px 0 0; font-weight: 500; }
+        .form-mesaji.basarili { color: #506152; }
+        .form-mesaji.hatali { color: var(--hata); }
+        .gizli-alan { position: absolute; left: -9999px; }
+
+        footer { padding: 60px 20px; text-align: center; color: white; background-color: var(--yazi); }
+        footer h2 { margin: 0 0 10px; font-family: var(--font-isim); font-size: 55px; font-weight: 400; color: var(--krem); line-height: 1; }
+        footer p { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* MOBİL UYARLAMALAR */
+        @media (max-width: 750px) {
+            .kapak { padding: 0; }
+            .sahne { padding: 20px; }
+            .sahne-1-icerik { font-size: 38px; gap: 15px; }
+            .sahne-1-icerik::before, .sahne-1-icerik::after { width: 40px; }
+            
+            .kapak h1 { font-size: clamp(60px, 16vw, 90px); white-space: normal; line-height: 1.1; margin-top: 10px; }
+            .kapak h1 .ampersand { display: block; margin: -5px 0; font-size: 0.5em; }
+            .geri-sayim { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .form-satiri { grid-template-columns: 1fr; gap: 0; }
+            .buton-grubu { margin-bottom: 20px; }
+            .program-listesi { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+
+        @media (max-width: 430px) {
+            .program-listesi { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .program-karti { padding: 25px 12px; }
+            .program-karti .program-ikon { font-size: 28px; margin-bottom: 4px; }
+            .program-karti strong { font-size: 18px; }
+            .program-karti h3 { font-size: 14px; margin-top: 6px; }
+
+            /* YATAY KAYDIRMALI HİKAYEMİZ MOBİL AYARI */
+            .zaman-cizgisi { gap: 12px; padding: 10px 15px 40px 15px; }
+            .zaman-adimi { flex: 0 0 65vw; } 
+            
+            .polaroid-alt-yazi { font-size: 22px; padding: 12px 5px 0; }
+            .zaman-bilgi { margin-top: 5px; padding-left: 5px; }
+            .zaman-bilgi h3 { font-size: 24px; margin-bottom: 6px; }
+            .zaman-bilgi p { font-size: 14px; line-height: 1.7; }
+
+            .karsilama-karti { padding: 45px 15px; } 
+            .karsilama-karti h1 { font-size: 22px; letter-spacing: 0; } 
+            .form-karti { padding: 25px 15px; }
+        }
+    </style>
+</head>
+
+<body class="kilitli">
+
+    <!-- ARKA PLAN MÜZİĞİ -->
+    <button id="muzikButonu" class="muzik-buton">🎵</button>
+    <audio id="arkaPlanMuzigi" loop>
+        <source src="muzik.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- AÇILIŞ EKRANI -->
+    <div class="acilis-ekrani" id="acilisEkrani">
+        <div class="karsilama-karti">
+            <div class="monogram">A <span class="monogram-amp">&amp;</span> Z</div>
+            <div class="karsilama-tarih">6 Mart 2027</div>
+            <h1>Size özel bir davetimiz var</h1>
+            <p>Mutluluğumuzu paylaşmanız ve<br>bu özel günümüze tanıklık etmeniz dileğiyle...</p>
+            <button class="buton" id="davetiAc">Daveti Aç</button>
+        </div>
+    </div>
+
+    <!-- ANA KAPAK (YENİ VİDEO VE SENKRONİZE YAZILAR) -->
+    <header class="kapak" id="anaKapak">
+        <!-- Yeni Video Dosyası -->
+        <video id="arkaplanVideo" muted playsinline loop class="arkaplan-video">
+            <source src="images/arkaplan2.mp4" type="video/mp4">
+        </video>
+        
+        <div class="video-overlay"></div>
+        
+        <div class="kapak-icerik">
+            
+            <!-- SAHNE 1: A Z Göründüğünde Çıkan "Evleniyoruz" Yazısı -->
+            <div id="sahne1" class="sahne">
+                <div class="sahne-1-icerik">Evleniyoruz</div>
+            </div>
+
+            <!-- SAHNE 2: A Z Kaybolduktan Sonra Gelen Asıl Bilgiler -->
+            <div id="sahne2" class="sahne">
+                <h1>Abdülsamed <span class="ampersand">&amp;</span> Zeynep</h1>
+                <div class="tarih">6 Mart 2027 · Cumartesi</div>
+                
+                <div class="buton-grubu">
+                    <a class="buton" href="#katilim">Katılımını Bildir</a>
+                    <a class="buton seffaf" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Abdülsamed+ve+Zeynep+Düğünü&dates=20270306T160000Z/20270306T200000Z&details=En+mutlu+günümüzde+sizleri+de+bekliyoruz.&location=Yeşil+Bahçe+Davet+Alanı,+İstanbul" target="_blank" rel="noopener">
+                        Takvime Ekle 📅
+                    </a>
+                </div>
+
+                <div class="geri-sayim" id="geriSayim">
+                    <div class="sayac-kutusu"><strong id="gun">00</strong><span>Gün</span></div>
+                    <div class="sayac-kutusu"><strong id="saat">00</strong><span>Saat</span></div>
+                    <div class="sayac-kutusu"><strong id="dakika">00</strong><span>Dakika</span></div>
+                    <div class="sayac-kutusu"><strong id="saniye">00</strong><span>Saniye</span></div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- HİKÂYEMİZ -->
+    <section class="bolum bolum-krem">
+        <div class="kapsayici">
+            <h2 class="bolum-basligi" data-aos="fade-up">Hikâyemiz</h2>
+            <p class="bolum-aciklama" data-aos="fade-up">İlk karşılaşmadan düğün günümüze uzanan yolculuğumuzun en özel anları.</p>
+
+            <div class="zaman-cizgisi">
+                <article class="zaman-adimi">
+                    <div class="polaroid-kart">
+                        <div class="polaroid-fotograf">
+                            <img src="images/tanisma.jpg" alt="Tanışma" loading="lazy">
+                        </div>
+                        <div class="polaroid-alt-yazi">Hikâyemizin başladığı gün</div>
+                    </div>
+                    <div class="zaman-dugum">01</div>
+                    <div class="zaman-bilgi">
+                        <span class="zaman-tarih">29 Eylül 2020</span>
+                        <h3>Tanıştık</h3>
+                        <p>Her şey güzel bir karşılaşmayla başladı. O gün, hayatımızın en özel hikâyesinin ilk sayfası oldu.</p>
+                    </div>
+                </article>
+
+                <article class="zaman-adimi">
+                    <div class="polaroid-kart">
+                        <div class="polaroid-fotograf">
+                            <img src="images/teklif.jpg" alt="Evlilik Teklifi" loading="lazy">
+                        </div>
+                        <div class="polaroid-alt-yazi">Geleceğe “evet” dediğimiz an</div>
+                    </div>
+                    <div class="zaman-dugum">02</div>
+                    <div class="zaman-bilgi">
+                        <span class="zaman-tarih">20 Haziran 2026</span>
+                        <h3>Evlilik Teklifi</h3>
+                        <p>Birlikte kurduğumuz hayallerin en anlamlı anlarından birinde geleceğe “evet” dedik.</p>
+                    </div>
+                </article>
+
+                <article class="zaman-adimi">
+                    <div class="polaroid-kart">
+                        <div class="polaroid-fotograf">
+                            <img src="images/nisan.jpg" alt="Nişan" loading="lazy">
+                        </div>
+                        <div class="polaroid-alt-yazi">Ailelerimizle paylaştığımız mutluluk</div>
+                    </div>
+                    <div class="zaman-dugum">03</div>
+                    <div class="zaman-bilgi">
+                        <span class="zaman-tarih">10 Temmuz 2026</span>
+                        <h3>Nişanlandık</h3>
+                        <p>Mutluluğumuzu ailelerimiz ve sevdiklerimizle paylaşarak düğün yolculuğumuza bir adım daha attık.</p>
+                    </div>
+                </article>
+
+                <article class="zaman-adimi">
+                    <div class="polaroid-kart">
+                        <div class="polaroid-fotograf">
+                            <img src="images/dugun-oncesi.jpg" alt="Düğün Öncesi" loading="lazy">
+                        </div>
+                        <div class="polaroid-alt-yazi">Hayatımızın en güzel gününe doğru</div>
+                    </div>
+                    <div class="zaman-dugum">04</div>
+                    <div class="zaman-bilgi">
+                        <span class="zaman-tarih">6 Mart 2027</span>
+                        <h3>Evleniyoruz</h3>
+                        <p>Şimdi hayatımızın en güzel gününe yaklaşırken mutluluğumuzu sizlerle paylaşmak için sabırsızlanıyoruz.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- DÜĞÜN PROGRAMI -->
+    <section class="bolum">
+        <div class="kapsayici">
+            <h2 class="bolum-basligi" data-aos="fade-up">Düğün Programı</h2>
+            <p class="bolum-aciklama" data-aos="fade-up">Bu özel gecede bizi bekleyen program.</p>
+
+            <div class="program-listesi">
+                <article class="program-karti" data-aos="fade-up" data-aos-delay="0">
+                    <span class="program-ikon">🤍</span>
+                    <strong>18.30</strong>
+                    <h3>Karşılama</h3>
+                </article>
+                <article class="program-karti" data-aos="fade-up" data-aos-delay="100">
+                    <span class="program-ikon">💍</span>
+                    <strong>19.00</strong>
+                    <h3>Nikâh</h3>
+                </article>
+                <article class="program-karti" data-aos="fade-up" data-aos-delay="200">
+                    <span class="program-ikon">🍽️</span>
+                    <strong>19.30</strong>
+                    <h3>Yemek</h3>
+                </article>
+                <article class="program-karti" data-aos="fade-up" data-aos-delay="300">
+                    <span class="program-ikon">🎉</span>
+                    <strong>21.00</strong>
+                    <h3>Eğlence</h3>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEKÂN -->
+    <section class="bolum bolum-krem">
+        <div class="kapsayici">
+            <h2 class="bolum-basligi" data-aos="fade-up">Düğün Mekânı</h2>
+            <p class="bolum-aciklama" data-aos="fade-up">Yol tarifi almak için aşağıdaki düğmeye basabilirsiniz.</p>
+
+            <div class="mekan-karti" data-aos="zoom-in">
+                <div class="mekan-ikon">📍</div>
+                <h3>Yeşil Bahçe Davet Alanı</h3>
+                <p>6 Mart 2027 · Saat 19.00</p>
+                <p>Örnek Mahallesi<br>Düğün Sokak No:14<br>İstanbul</p>
+                <a class="buton" href="https://maps.google.com" target="_blank" rel="noopener">Google Maps'te Aç</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DAVETLİ KAMERASINDAN -->
+    <section class="bolum" id="ani-yakala">
+        <div class="kapsayici" style="text-align: center;">
+            <h2 class="bolum-basligi" data-aos="fade-up">Sizin Gözünüzden Biz</h2>
+            
+            <p class="bolum-aciklama" data-aos="fade-up">
+                Bu geceyi bizimle paylaştığınız için çok mutluyuz! Masanızdaki anıları, 
+                eğlenceli kareleri ve yakaladığınız güzel anları dijital albümümüze 
+                yükleyerek mutluluğumuzu ölümsüzleştirebilirsiniz.
+            </p>
+
+            <div data-aos="zoom-in" style="background-color: white; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 16px; max-width: 500px; margin: 0 auto; box-shadow: 0 20px 50px rgba(74, 62, 53, 0.08); overflow: hidden;">
+                <img src="images/sizin-gozunuzden.jpg" alt="Davetli Kamerası" style="width: 100%; height: 260px; object-fit: cover; display: block;">
+                
+                <div style="padding: 35px 20px;">
+                    <h3 style="font-family: var(--font-baslik); color: var(--yazi); font-size: 28px; margin: 0 0 20px; font-weight: 500;">Anıyı Yakala</h3>
+                    
+                    <a class="buton" href="BURAYA_GOOGLE_PHOTOS_LINKI_GELECEK" target="_blank" rel="noopener" style="width: 100%; max-width: 250px;">
+                        Fotoğraf Yükle
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KATILIM FORMU -->
+    <section class="bolum" id="katilim">
+        <div class="kapsayici">
+            <h2 class="bolum-basligi" data-aos="fade-up">Katılım Bildirimi</h2>
+            <p class="bolum-aciklama" data-aos="fade-up">Katılım durumunuzu aşağıdaki form aracılığıyla bildirebilirsiniz.</p>
+
+            <form class="form-karti" id="katilimFormu" action="https://formspree.io/f/xeeybnya" method="POST" data-aos="fade-up">
+                <input type="hidden" name="_subject" value="Abdülsamed ve Zeynep Düğün Katılım Cevabı">
+                <div class="gizli-alan" aria-hidden="true">
+                    <label for="website">Bu alanı boş bırakın</label>
+                    <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="form-satiri">
+                    <div class="form-alani">
+                        <label for="isim">Adınız ve soyadınız</label>
+                        <input type="text" id="isim" name="Ad Soyad" placeholder="Adınız ve soyadınız" required>
+                    </div>
+                    <div class="form-alani">
+                        <label for="durum">Katılacak mısınız?</label>
+                        <select id="durum" name="Katılım Durumu" required>
+                            <option value="">Seçiniz</option>
+                            <option value="Evet, katılacağım">Evet, katılacağım</option>
+                            <option value="Maalesef katılamayacağım">Maalesef katılamayacağım</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-satiri">
+                    <div class="form-alani">
+                        <label for="kisiSayisi">Katılımcı sayısı</label>
+                        <input type="number" id="kisiSayisi" name="Katılımcı Sayısı" min="1" max="10" value="1" required>
+                    </div>
+                    <div class="form-alani">
+                        <label for="sarki">Şarkı isteğiniz</label>
+                        <input type="text" id="sarki" name="Şarkı İsteği" placeholder="Sanatçı ve şarkı adı">
+                    </div>
+                </div>
+
+                <div class="form-alani">
+                    <label for="mesaj">Çifte mesajınız</label>
+                    <textarea id="mesaj" name="Çifte Mesaj" placeholder="Güzel dileklerinizi buraya yazabilirsiniz..."></textarea>
+                </div>
+
+                <button class="buton" id="gonderButonu" type="submit">Cevabımı Gönder</button>
+                <p class="form-mesaji" id="formMesaji" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- SAYFA SONU -->
+    <footer>
+        <h2>Abdülsamed & Zeynep</h2>
+        <p>Sizi aramızda görmek için sabırsızlanıyoruz.</p>
+        <p>6 Mart 2027</p>
+    </footer>
+
+    <!-- JAVASCRIPT KÜTÜPHANELERİ VE SCRIPTLER -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // MÜZİK ÇALAR
+        const muzik = document.getElementById("arkaPlanMuzigi");
+        const muzikButonu = document.getElementById("muzikButonu");
+        let caliyorMu = false;
+        muzik.volume = 0.2;
+
+        muzikButonu.addEventListener("click", function () {
+            if (caliyorMu) {
+                muzik.pause();
+                muzikButonu.classList.remove("caliyor");
+            } else {
+                muzik.play();
+                muzikButonu.classList.add("caliyor");
+            }
+            caliyorMu = !caliyorMu;
+        });
+
+        // 🌟 VİDEO VE YAZI SENKRONİZASYONU (SİHİRLİ KISIM) 🌟
+        const arkaplanVideo = document.getElementById('arkaplanVideo');
+        const sahne1 = document.getElementById('sahne1'); // Sadece Evleniyoruz
+        const sahne2 = document.getElementById('sahne2'); // İsimler ve Sayaç
+
+        // DİKKAT: BURADAKİ SANİYELERİ KENDİ VİDEONA GÖRE AYARLA!
+        const azGelisSaniyesi = 1.0; // "A Z" harflerinin videoda belirdiği saniye
+        const azGidisSaniyesi = 4.5; // "A Z" harflerinin kaybolup ortasının boşaldığı saniye
+
+        arkaplanVideo.addEventListener('timeupdate', () => {
+            const sure = arkaplanVideo.currentTime;
+
+            if (sure >= azGelisSaniyesi && sure < azGidisSaniyesi) {
+                // Sadece "Evleniyoruz" yazısını göster
+                sahne1.classList.add('aktif');
+                sahne2.classList.remove('aktif');
+            } else if (sure >= azGidisSaniyesi) {
+                // "A Z" bitti, asıl menü gelsin (isimler, tarih, sayaç)
+                sahne1.classList.remove('aktif');
+                sahne2.classList.add('aktif');
+            } else {
+                // Videonun en başı (0'dan azGelisSaniyesi'ne kadar)
+                sahne1.classList.remove('aktif');
+                sahne2.classList.remove('aktif');
+            }
+        });
+
+        // DAVETİ AÇMA
+        const davetiAcButonu = document.getElementById("davetiAc");
+        const acilisEkrani = document.getElementById("acilisEkrani");
+
+        davetiAcButonu.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            acilisEkrani.classList.add("gizli");
+            document.body.classList.remove("kilitli");
+            
+            // Müziği ve videoyu aynı anda başlat
+            arkaplanVideo.play();
+            muzik.play().then(() => {
+                muzikButonu.classList.add("caliyor");
+                caliyorMu = true;
+            }).catch(hata => {
+                console.log("Müzik otomatik başlatılamadı.");
+            });
+        });
+
+        // GERİ SAYIM
+        const dugunTarihi = new Date("2027-03-06T19:00:00+03:00").getTime();
+        function geriSayimiGuncelle() {
+            const simdi = new Date().getTime();
+            const kalanSure = dugunTarihi - simdi;
+            if (kalanSure <= 0) {
+                document.getElementById("geriSayim").innerHTML = "<h2 style='grid-column: span 4; font-family: var(--font-baslik);'>Bugün evleniyoruz! 🎉</h2>";
+                return;
+            }
+            document.getElementById("gun").textContent = Math.floor(kalanSure / (1000 * 60 * 60 * 24));
+            document.getElementById("saat").textContent = String(Math.floor((kalanSure % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, "0");
+            document.getElementById("dakika").textContent = String(Math.floor((kalanSure % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+            document.getElementById("saniye").textContent = String(Math.floor((kalanSure % (1000 * 60)) / 1000)).padStart(2, "0");
+        }
+        geriSayimiGuncelle();
+        setInterval(geriSayimiGuncelle, 1000);
+
+        // FORM GÖNDERİMİ
+        const katilimFormu = document.getElementById("katilimFormu");
+        const formMesaji = document.getElementById("formMesaji");
+        const gonderButonu = document.getElementById("gonderButonu");
+
+        katilimFormu.addEventListener("submit", async function (olay) {
+            olay.preventDefault();
+            formMesaji.textContent = "";
+            formMesaji.className = "form-mesaji";
+            const eskiButonYazisi = gonderButonu.textContent;
+            gonderButonu.disabled = true;
+            gonderButonu.textContent = "Gönderiliyor...";
+
+            try {
+                const formVerileri = new FormData(katilimFormu);
+                const cevap = await fetch(katilimFormu.action, { method: katilimFormu.method, body: formVerileri, headers: { "Accept": "application/json" } });
+                if (!cevap.ok) throw new Error("Form gönderilemedi.");
+                const isim = document.getElementById("isim").value.trim();
+                const durum = document.getElementById("durum").value;
+                formMesaji.textContent = (durum === "Evet, katılacağım") ? "Teşekkürler " + isim + "! Sizi aramızda görmek için sabırsızlanıyoruz." : "Teşekkürler " + isim + ". Cevabınız alındı.";
+                formMesaji.classList.add("basarili");
+                katilimFormu.reset();
+            } catch (hata) {
+                formMesaji.textContent = "Gönderilemedi. İnternet bağlantınızı kontrol edin.";
+                formMesaji.classList.add("hatali");
+            } finally {
+                gonderButonu.disabled = false;
+                gonderButonu.textContent = eskiButonYazisi;
+            }
+        });
+    </script>
+</body>
+</html>
