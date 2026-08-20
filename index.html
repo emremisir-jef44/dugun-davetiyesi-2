@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Düğün Davetiyesi</title>
     
-    <!-- Zarif bir Google Font ekliyoruz -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
@@ -18,65 +17,59 @@
             width: 100%;
             height: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background-color: #faf9f6; /* Davetiyenin arka plan rengi (krem/bej) */
+            background-color: #faf9f6; 
             overflow-x: hidden;
         }
 
-        /* --- GİRİŞ EKRANI (OVERLAY) AYARLARI --- */
+        /* --- GİRİŞ EKRANI (TAM EKRAN VİDEO VE TIKLAMA ALANI) --- */
         #giris-ekrani {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000; /* Videonun arka planıyla bütünleşmesi için siyah */
+            width: 100vw;
+            height: 100vh;
+            background-color: #e5ded5; /* Siyah ekran yerine zarfın krem tonlarında bir arka plan */
+            z-index: 9999;
+            cursor: pointer;
+            
+            /* Yavaşça kaybolma efekti (1.5 saniye) */
+            transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+            
+            /* İçindeki metni ortalayıp alta hizalamak için flex kullanıyoruz */
             display: flex;
             justify-content: center;
-            align-items: center;
-            z-index: 9999; /* En üstte durmasını sağlar */
-            cursor: pointer; /* Tıklanabilir olduğunu belli eder */
-            
-            /* Yavaşça kaybolma efekti (1.5 saniye sürer) */
-            transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+            align-items: flex-end; /* Yazıyı aşağı atar */
         }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px; /* Mobil uyumlu, çok büyümesini engeller */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        /* Videonun ekranı tamamen kaplamasını sağlayan ayar */
         #zarf-video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            /* playsinline özelliği iOS cihazlarda videonun tam ekrana fırlamasını engeller */
+            height: 100%;
+            object-fit: cover; /* Siyah boşluk bırakmaz, ekranı zarfla doldurur */
+            z-index: 1; /* Yazının arkasında kalması için */
         }
 
-        /* --- ZARFI AÇINIZ YAZISI --- */
+        /* --- EKRANA TIKLAYINIZ YAZISI --- */
         #acilis-metni {
-            position: absolute;
-            bottom: 20%; /* Videonun alt kısmına konumlandırır */
-            color: #ffffff;
+            position: relative;
+            z-index: 2; /* Videonun üstünde kalır */
+            color: #333333; /* Krem zarfın üzerinde okunacak koyu zarif bir gri */
+            margin-bottom: 15vh; /* Ekranın altından %15 yukarıda durur */
             text-align: center;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Yazının videonun üzerinde okunabilmesi için gölge */
+            letter-spacing: 2px;
+            font-size: 1.5rem;
             
             /* Nefes alma (yanıp sönme) animasyonu */
             animation: pulse 2s infinite ease-in-out;
         }
 
-        #acilis-metni p {
-            font-size: 1.8rem;
-            margin: 0;
-            letter-spacing: 3px;
-        }
-
         @keyframes pulse {
-            0% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0.6; transform: scale(1); }
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
         }
 
         /* Video bitince eklenecek kaybolma class'ı */
@@ -89,40 +82,32 @@
         #ana-icerik {
             padding: 50px 20px;
             text-align: center;
-            /* Başlangıçta giriş ekranının arkasında durur, ekran kaybolunca ortaya çıkar */
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #333;
+            /* Giriş ekranı silinince burası zaten görünür olacak */
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Aşama: Tıklanabilir Zarf Giriş Ekranı -->
+    <!-- 1. Aşama: Tam Ekran Zarf Videolu Giriş -->
     <div id="giris-ekrani">
-        <div class="video-container">
-            <!-- Videoyu klasöründen çekiyoruz -->
-            <video id="zarf-video" playsinline>
-                <source src="images/giris-zarf-2.mp4" type="video/mp4">
-                Tarayıcınız video oynatmayı desteklemiyor.
-            </video>
-            
-            <div id="acilis-metni">
-                <p>Zarfı açınız</p>
-            </div>
-        </div>
+        <!-- 
+          preload="auto" ilk karenin yüklenmesini sağlar.
+          #t=0.001 taktiği iOS/Safari'de ilk karenin ekranda poster gibi kalmasını garantiler.
+        -->
+        <video id="zarf-video" playsinline preload="auto">
+            <source src="images/giris-zarf-2.mp4#t=0.001" type="video/mp4">
+        </video>
+        
+        <div id="acilis-metni">Ekrana tıklayınız</div>
     </div>
 
-    <!-- 2. Aşama: Zarf Açıldıktan Sonra Gelecek Ana Site İçeriği -->
+    <!-- 2. Aşama: Video Bitince Gelecek Asıl Site -->
     <div id="ana-icerik">
-        <h1>Hikayemiz Başlıyor...</h1>
-        <p>Davetiye detayları, tarih, mekan ve diğer tüm bilgiler buraya gelecek.</p>
-        <!-- Diğer site kodlarını buraya eklemeye devam edebilirsin -->
+        <h1>Hoş Geldiniz...</h1>
+        <p>Asıl davetiye tasarımın ve detaylar burada yer alacak.</p>
     </div>
 
-    <!-- JavaScript: Tıklama ve Geçiş Mantığı -->
+    <!-- JavaScript: Oynatma ve Geçiş Kontrolü -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const girisEkrani = document.getElementById("giris-ekrani");
@@ -130,26 +115,25 @@
             const acilisMetni = document.getElementById("acilis-metni");
             let isVideoPlayed = false;
 
-            // Ekranın herhangi bir yerine tıklandığında çalışır
+            // Ekrana tıklandığında...
             girisEkrani.addEventListener("click", function() {
                 if (!isVideoPlayed) {
                     isVideoPlayed = true;
                     
-                    // 1. Zarfı açınız yazısını gizle
+                    // 1. "Ekrana tıklayınız" yazısını hemen yok et
                     acilisMetni.style.display = "none";
                     
-                    // 2. Videoyu oynat
+                    // 2. Videoyu oynatmaya başla
                     zarfVideo.play();
                 }
             });
 
-            // Video tamamen bittiğinde ("ended" eventi) çalışır
+            // Video tamamen bittiğinde...
             zarfVideo.addEventListener("ended", function() {
-                
-                // 3. Giriş ekranına yavaşça kaybolma (fade-out) efektini ekle
+                // 3. Giriş ekranına yavaşça kaybolma (fade-out) efektini ver
                 girisEkrani.classList.add("fade-out");
                 
-                // 4. Animasyon bittikten (1.5 sn) sonra arka planda tıklamayı engellememesi için tamamen yok et
+                // 4. Animasyon süresi (1.5s) kadar bekleyip elementi tamamen DOM akışından çıkar
                 setTimeout(() => {
                     girisEkrani.style.display = "none";
                 }, 1500); 
