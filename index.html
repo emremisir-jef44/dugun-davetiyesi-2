@@ -77,10 +77,10 @@
         .sahne { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateY(15px); }
         .sahne.aktif { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-        /* SAHNE 1: SADECE EVLENİYORUZ YAZISI (AZ'NİN TEPESİNDE) */
-        .sahne-1-icerik { position: absolute; top: 12%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 20px; color: var(--yazi); font-family: var(--font-isim); font-size: 55px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); width: 100%; }
-        .sahne-1-icerik::before, .sahne-1-icerik::after { content: ""; width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--yazi)); }
-        .sahne-1-icerik::after { background: linear-gradient(to left, transparent, var(--yazi)); }
+        /* SAHNE 1: SADECE EVLENİYORUZ YAZISI */
+        .sahne-1-icerik { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 20px; color: #4e7354; font-family: var(--font-isim); font-size: 70px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); width: 100%; }
+        .sahne-1-icerik::before, .sahne-1-icerik::after { content: ""; width: 70px; height: 1px; background: linear-gradient(to right, transparent, #4e7354); }
+        .sahne-1-icerik::after { background: linear-gradient(to left, transparent, #4e7354); }
 
         /* SAHNE 2: İSİMLER, SAYAÇ VE ADRES (MERKEZLENMİŞ) */
         .sahne-2-ust-yazi { font-family: var(--font-isim); font-size: 42px; color: var(--yazi); margin-bottom: -15px; text-shadow: 0 2px 15px rgba(255,255,255,1); }
@@ -158,8 +158,8 @@
             .sahne { padding: 20px; }
             
             /* Saniye 1: Evleniyoruz Tepede */
-            .sahne-1-icerik { font-size: 42px; gap: 15px; top: 12%; }
-            .sahne-1-icerik::before, .sahne-1-icerik::after { width: 40px; }
+            .sahne-1-icerik { font-size: 55px; gap: 15px; top: 20%; }
+            .sahne-1-icerik::before, .sahne-1-icerik::after { width: 45px; }
             
             /* Saniye 2: Düzenlemeler */
             .sahne-2-ust-yazi { font-size: 32px; margin-bottom: -10px; }
