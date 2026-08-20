@@ -17,11 +17,11 @@
 
     <style>
         :root {
-            --krem: #fcfaf7; /* Videonun ortasındaki o tertemiz beyaz/krem tonu */
+            --krem: #fcfaf7; 
             --acik-krem: #ffffff; 
-            --altin: #c1a167; /* Videodaki AZ harflerinin altın tonu */
+            --altin: #c1a167; 
             --koyu-altin: #a38550;
-            --yazi: #4a3e35; /* Koyu yeşil yerine, videoyla uyumlu lüks acı kahve/bronz tonu */
+            --yazi: #4a3e35; 
             --gri: #7d7268;
             --hata: #a33a3a;
             --font-isim: 'Pinyon Script', cursive; 
@@ -68,8 +68,9 @@
 
         /* SENKRONİZE EDİLMİŞ VİDEO KAPAK BÖLÜMÜ */
         .kapak { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 70px 20px; text-align: center; color: var(--yazi); }
-        .arkaplan-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover; }
-        /* Videonun kenarındaki güller net görünsün diye overlay'i çok uçuk yaptık */
+        
+        /* ZOOM İPTAL EDİLDİ - EKRANA TAM OTURAN MOBİL ODAKLI VİDEO */
+        .arkaplan-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
         .video-overlay { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); z-index: 1; } 
         
         .kapak-icerik { position: relative; z-index: 2; width: min(1000px, 100%); height: 100vh; display: flex; align-items: center; justify-content: center; }
@@ -78,8 +79,8 @@
         .sahne { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateY(20px); }
         .sahne.aktif { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-        /* SAHNE 1: Sadece Evleniyoruz Yazısı */
-        .sahne-1-icerik { display: flex; align-items: center; justify-content: center; gap: 20px; color: var(--yazi); font-family: var(--font-isim); font-size: 55px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); }
+        /* SAHNE 1: "Evleniyoruz" Yazısı (AZ'NİN ÜZERİNDE, EN TEPEDE) */
+        .sahne-1-icerik { position: absolute; top: 12%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 20px; color: var(--yazi); font-family: var(--font-isim); font-size: 55px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); width: 100%; }
         .sahne-1-icerik::before, .sahne-1-icerik::after { content: ""; width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--yazi)); }
         .sahne-1-icerik::after { background: linear-gradient(to left, transparent, var(--yazi)); }
 
@@ -101,24 +102,19 @@
         .bolum-basligi { margin: 0 0 15px; text-align: center; font-family: var(--font-baslik); font-size: clamp(36px, 5vw, 48px); font-weight: 500; line-height: 1.2; letter-spacing: 2px; color: var(--yazi); }
         .bolum-aciklama { max-width: 690px; margin: 0 auto 60px; text-align: center; color: var(--gri); line-height: 1.9; font-size: 15px; }
 
-        /* YATAY KAYDIRMALI HİKAYEMİZ (Serbest Dinamik Kaydırma) */
+        /* YATAY KAYDIRMALI HİKAYEMİZ */
         .zaman-cizgisi { display: flex; overflow-x: auto; gap: 20px; padding: 10px 20px 40px 20px; margin: 0; -ms-overflow-style: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .zaman-cizgisi::-webkit-scrollbar { display: none; }
-        
         .zaman-adimi { flex: 0 0 290px; display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
-        
         .polaroid-kart { width: 100%; background: white; padding: 14px 14px 25px; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 4px; box-shadow: 0 15px 35px rgba(74, 62, 53, 0.08); transition: transform 0.4s ease, box-shadow 0.4s ease; }
         .zaman-adimi:nth-child(odd) .polaroid-kart { transform: rotate(-1.5deg); }
         .zaman-adimi:nth-child(even) .polaroid-kart { transform: rotate(1.5deg); }
         .polaroid-kart:hover { transform: translateY(-7px) rotate(0deg) !important; box-shadow: 0 25px 50px rgba(74, 62, 53, 0.12); }
-        
         .polaroid-fotograf { overflow: hidden; width: 100%; aspect-ratio: 4 / 5; background: #f0f0f0; }
         .polaroid-fotograf img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.6s ease; }
         .polaroid-kart:hover .polaroid-fotograf img { transform: scale(1.04); }
         .polaroid-alt-yazi { padding: 17px 5px 0; text-align: center; font-family: var(--font-isim); font-size: 26px; color: var(--yazi); }
-        
         .zaman-dugum { position: relative; z-index: 3; width: 45px; height: 45px; border: 3px solid var(--acik-krem); border-radius: 50%; background-color: var(--altin); color: white; font-weight: 500; font-size: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(193, 161, 103, 0.4); font-family: var(--font-baslik); margin-top: -20px; margin-bottom: 15px; }
-        
         .zaman-bilgi { text-align: center; width: 100%; padding: 0 10px; }
         .zaman-tarih { display: inline-block; margin-bottom: 12px; padding: 6px 14px; border: 1px solid rgba(193, 161, 103, 0.4); border-radius: 999px; color: var(--altin); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; }
         .zaman-bilgi h3 { margin: 0 0 12px; font-family: var(--font-baslik); font-size: 28px; line-height: 1.1; color: var(--yazi); font-weight: 500; letter-spacing: 1px; }
@@ -158,7 +154,9 @@
         @media (max-width: 750px) {
             .kapak { padding: 0; }
             .sahne { padding: 20px; }
-            .sahne-1-icerik { font-size: 38px; gap: 15px; }
+            
+            /* Mobilde Evleniyoruz yazısı en tepede ve daha estetik */
+            .sahne-1-icerik { font-size: 42px; gap: 15px; top: 10%; }
             .sahne-1-icerik::before, .sahne-1-icerik::after { width: 40px; }
             
             .kapak h1 { font-size: clamp(60px, 16vw, 90px); white-space: normal; line-height: 1.1; margin-top: 10px; }
@@ -176,7 +174,6 @@
             .program-karti strong { font-size: 18px; }
             .program-karti h3 { font-size: 14px; margin-top: 6px; }
 
-            /* YATAY KAYDIRMALI HİKAYEMİZ MOBİL AYARI */
             .zaman-cizgisi { gap: 12px; padding: 10px 15px 40px 15px; }
             .zaman-adimi { flex: 0 0 65vw; } 
             
