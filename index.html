@@ -27,7 +27,6 @@
             --gri: #7d7268;
             --hata: #a33a3a;
             
-            /* GÜNCELLENEN YAZI TİPLERİ */
             --font-isim: 'Alex Brush', cursive; 
             --font-baslik: 'Cinzel', serif; 
             --font-metin: 'Lora', serif; 
@@ -46,7 +45,7 @@
         }
         body.kilitli { overflow: hidden; }
 
-        /* YENİ ZARF AÇILIŞ EKRANI */
+        /* ZARF AÇILIŞ EKRANI */
         .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: #f7f3ec; transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer; }
         .acilis-ekrani.gizli { opacity: 0; visibility: hidden; pointer-events: none; }
         
@@ -63,7 +62,6 @@
         .buton { display: inline-block; padding: 14px 35px; border: none; border-radius: 999px; background-color: var(--yazi); color: white; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-metin); }
         .buton:hover { transform: translateY(-2px); background-color: var(--altin); box-shadow: 0 10px 20px rgba(193, 161, 103, 0.25); }
         
-        /* Şeffaf Çizgili Buton (Galeriden Seç için) */
         .buton.seffaf { background-color: transparent; border: 1px solid var(--yazi); color: var(--yazi); }
         .buton.seffaf:hover { background-color: var(--yazi); color: white; }
 
@@ -76,21 +74,18 @@
         .muzik-buton.caliyor { animation: nabiz 2s infinite; }
         @keyframes nabiz { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(193, 161, 103, 0.6); } 70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(193, 161, 103, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(193, 161, 103, 0); } }
 
-        /* SENKRONİZE EDİLMİŞ VİDEO KAPAK BÖLÜMÜ */
+        /* KAPAK BÖLÜMÜ */
         .kapak { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 70px 20px; text-align: center; color: var(--yazi); }
         
         .arkaplan-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
         .video-overlay { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.2); z-index: 1; } 
         
-        .kapak-icerik { position: relative; z-index: 2; width: min(1000px, 100%); height: 100vh; display: flex; align-items: center; justify-content: center; }
-        
-        /* SAHNELER */
-        .sahne { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateY(15px); }
-        .sahne.aktif { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        /* İçeriklerin sabit durmasını sağlayan kısım (Gereksiz animasyonlar silindi) */
+        .kapak-icerik { position: relative; z-index: 2; width: min(1000px, 100%); height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
         .kapak h1 { margin: 0; font-family: var(--font-isim); font-size: clamp(85px, 12vw, 140px); font-weight: 400; line-height: 1.1; letter-spacing: 2px; text-shadow: 0 4px 30px rgba(255,255,255,1); }
         
-        /* GÜNCELLENEN & (AMPERSAND) İŞARETİ */
+        /* AMPERSAND İŞARETİ */
         .kapak h1 .ampersand { 
             display: inline-block; 
             margin: 0 0.1em; 
@@ -103,7 +98,7 @@
 
         .tarih { margin: 10px 0 25px; font-size: 16px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--yazi); text-shadow: 0 2px 15px rgba(255,255,255,1); font-family: var(--font-baslik); }
         
-        /* KÜÇÜLTÜLMÜŞ SAYAÇ */
+        /* SAYAÇ */
         .geri-sayim { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; max-width: 380px; margin: 0 auto 25px auto; }
         .sayac-kutusu { padding: 12px 5px; background-color: rgba(255, 255, 255, 0.85); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 10px; backdrop-filter: blur(8px); color: var(--yazi); box-shadow: 0 10px 25px rgba(78, 115, 84, 0.1); }
         .sayac-kutusu strong { display: block; font-family: var(--font-baslik); font-size: 24px; font-weight: 500; line-height: 1; }
@@ -152,8 +147,6 @@
         /* MOBİL UYARLAMALAR */
         @media (max-width: 750px) {
             .kapak { padding: 0; }
-            .sahne { padding: 20px; }
-            
             .zarfi-ac-yazisi { font-size: 14px; bottom: 10%; }
             
             .kapak h1 { font-size: clamp(75px, 18vw, 100px); white-space: normal; line-height: 0.9; margin-top: 5px; }
@@ -202,38 +195,30 @@
         <div class="zarfi-ac-yazisi" id="zarfYazisi">Ekrana Tıklayınız</div>
     </div>
 
-    <!-- ANA KAPAK (VİDEO VE SENKRONİZE YAZILAR) -->
+    <!-- ANA KAPAK -->
     <header class="kapak" id="anaKapak">
-        <!-- Ana İçerik Arka Plan Videosu -->
+        <!-- Arka Plan Videosu -->
         <video id="arkaplanVideo" muted playsinline loop class="arkaplan-video" preload="auto">
             <source src="images/arkaplan2.mp4" type="video/mp4">
         </video>
         
         <div class="video-overlay"></div>
         
+        <!-- YAZILARIN SABİT KALDIĞI ANA İÇERİK BÖLÜMÜ -->
         <div class="kapak-icerik">
+            <h1>Zeynep <span class="ampersand">&amp;</span> Samed</h1>
+            <div class="tarih">6 Mart 2027 · Cumartesi</div>
             
-            <!-- SAHNE 1: GİZLENDİ (Sadece Zarf Sonrası Bekleme Anı İçin JS Altyapısı Korundu) -->
-            <div id="sahne1" class="sahne"></div>
-
-            <!-- SAHNE 2: İSİMLER, SAYAÇ VE ADRES -->
-            <div id="sahne2" class="sahne">
-                
-                <h1>Zeynep <span class="ampersand">&amp;</span> Samed</h1>
-                <div class="tarih">6 Mart 2027 · Cumartesi</div>
-                
-                <div class="geri-sayim" id="geriSayim">
-                    <div class="sayac-kutusu"><strong id="gun">00</strong><span>Gün</span></div>
-                    <div class="sayac-kutusu"><strong id="saat">00</strong><span>Saat</span></div>
-                    <div class="sayac-kutusu"><strong id="dakika">00</strong><span>Dakika</span></div>
-                    <div class="sayac-kutusu"><strong id="saniye">00</strong><span>Saniye</span></div>
-                </div>
-
-                <div class="buton-grubu">
-                    <a class="buton" href="#mekan">Adres Bilgisi 📍</a>
-                </div>
+            <div class="geri-sayim" id="geriSayim">
+                <div class="sayac-kutusu"><strong id="gun">00</strong><span>Gün</span></div>
+                <div class="sayac-kutusu"><strong id="saat">00</strong><span>Saat</span></div>
+                <div class="sayac-kutusu"><strong id="dakika">00</strong><span>Dakika</span></div>
+                <div class="sayac-kutusu"><strong id="saniye">00</strong><span>Saniye</span></div>
             </div>
 
+            <div class="buton-grubu">
+                <a class="buton" href="#mekan">Adres Bilgisi 📍</a>
+            </div>
         </div>
     </header>
 
@@ -283,7 +268,7 @@
         </div>
     </section>
 
-    <!-- DAVETLİ KAMERASI (FİREBASE ENTEGRELİ ÇİFT BUTON) -->
+    <!-- DAVETLİ KAMERASI -->
     <section class="bolum" id="ani-yakala">
         <div class="kapsayici" style="text-align: center;">
             <h2 class="bolum-basligi" data-aos="fade-up">Sizin Gözünüzden Biz</h2>
@@ -380,7 +365,7 @@
     <!-- JAVASCRIPT KÜTÜPHANELERİ VE SCRIPTLER -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
-    <!-- FİREBASE SDK'LARI (Fotoğraf Yükleme İçin) -->
+    <!-- FİREBASE SDK'LARI -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
@@ -472,33 +457,11 @@
             caliyorMu = !caliyorMu;
         });
 
-        // 🌟 VİDEO VE YAZI SENKRONİZASYONU (ANA KAPAK İÇİN) 🌟
-        const arkaplanVideo = document.getElementById('arkaplanVideo');
-        const sahne1 = document.getElementById('sahne1'); 
-        const sahne2 = document.getElementById('sahne2'); 
-
-        const azGelisSaniyesi = 1.0; 
-        const azGidisSaniyesi = 4.5; 
-
-        arkaplanVideo.addEventListener('timeupdate', () => {
-            const sure = arkaplanVideo.currentTime;
-
-            if (sure >= azGelisSaniyesi && sure < azGidisSaniyesi) {
-                sahne1.classList.add('aktif');
-                sahne2.classList.remove('aktif');
-            } else if (sure >= azGidisSaniyesi) {
-                sahne1.classList.remove('aktif');
-                sahne2.classList.add('aktif');
-            } else {
-                sahne1.classList.remove('aktif');
-                sahne2.classList.remove('aktif');
-            }
-        });
-
-        // 🌟 ZARF AÇILIŞ MANTIĞI 🌟
+        // ZARF AÇILIŞ MANTIĞI
         const acilisEkrani = document.getElementById("acilisEkrani");
         const zarfVideo = document.getElementById("zarfVideo");
         const zarfYazisi = document.getElementById("zarfYazisi");
+        const arkaplanVideo = document.getElementById('arkaplanVideo');
         let zarfAcildiMi = false;
 
         acilisEkrani.addEventListener("click", function () {
@@ -516,6 +479,7 @@
             }).catch(e => console.log("Müzik otomatik başlatılamadı"));
         });
 
+        // Zarf animasyonu bittiğinde ana siteye geç
         zarfVideo.addEventListener('ended', () => {
             acilisEkrani.classList.add("gizli");
             document.body.classList.remove("kilitli");
