@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:title" content="Abdülsamed & Zeynep | Düğün Davetiyesi">
-    <meta property="og:description" content="Mutluluğumuzu paylaşmak dileğiyle...">
+    <meta property="og:title" content="Zeynep & Samed | Nişan Davetiyesi">
+    <meta property="og:description" content="6 Mart 2027 tarihinde gerçekleşecek nişanımıza davetlisiniz. Mutluluğumuzu paylaşmak dileğiyle...">
     <meta property="og:image" content="images/kapak.jpg"> 
     <meta property="og:type" content="website">
 
-    <title>Abdülsamed & Zeynep | Düğün Davetiyesi</title>
+    <title>Zeynep & Samed | Nişan Davetiyesi</title>
 
-    <!-- Google Fonts (Lüks ve Estetik) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Şık ve Okunabilir Yeni Fontlar) -->
+    <!-- Cinzel: Başlıklar, Lora: Genel Metinler, Alex Brush: İsimler -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -24,9 +26,11 @@
             --yazi: #4e7354; /* Asil Yeşil */
             --gri: #7d7268;
             --hata: #a33a3a;
-            --font-isim: 'Pinyon Script', cursive; 
+            
+            /* GÜNCELLENEN YAZI TİPLERİ */
+            --font-isim: 'Alex Brush', cursive; 
             --font-baslik: 'Cinzel', serif; 
-            --font-metin: 'Jost', sans-serif; 
+            --font-metin: 'Lora', serif; 
         }
 
         * { box-sizing: border-box; }
@@ -37,13 +41,13 @@
             font-family: var(--font-metin); 
             background: linear-gradient(180deg, #ffffff 0%, #fcfaf7 100%); 
             color: var(--yazi); 
-            line-height: 1.7; 
-            font-weight: 300; 
+            line-height: 1.8; 
+            font-weight: 400; 
         }
         body.kilitli { overflow: hidden; }
 
-        /* YENİ ZARF AÇILIŞ EKRANI (Siyah Ekran Düzeltildi) */
-        .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: #f7f3ec; /* Video yüklenmeden önce zarfın rengine yakın bir ton */ transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer; }
+        /* YENİ ZARF AÇILIŞ EKRANI */
+        .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: #f7f3ec; transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer; }
         .acilis-ekrani.gizli { opacity: 0; visibility: hidden; pointer-events: none; }
         
         .zarf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -58,6 +62,11 @@
         /* BUTONLAR */
         .buton { display: inline-block; padding: 14px 35px; border: none; border-radius: 999px; background-color: var(--yazi); color: white; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-metin); }
         .buton:hover { transform: translateY(-2px); background-color: var(--altin); box-shadow: 0 10px 20px rgba(193, 161, 103, 0.25); }
+        
+        /* Şeffaf Çizgili Buton (Galeriden Seç için) */
+        .buton.seffaf { background-color: transparent; border: 1px solid var(--yazi); color: var(--yazi); }
+        .buton.seffaf:hover { background-color: var(--yazi); color: white; }
+
         .buton-grubu { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 10px; margin-bottom: 30px; pointer-events: auto; }
         
         /* MÜZİK */
@@ -79,47 +88,33 @@
         .sahne { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateY(15px); }
         .sahne.aktif { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-        /* SAHNE 1: SADECE EVLENİYORUZ YAZISI */
-        .sahne-1-icerik { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 20px; color: var(--yazi); font-family: var(--font-isim); font-size: 70px; font-weight: 400; text-shadow: 0 2px 25px rgba(255,255,255,1); width: 100%; }
-        .sahne-1-icerik::before, .sahne-1-icerik::after { content: ""; width: 70px; height: 1px; background: linear-gradient(to right, transparent, var(--yazi)); }
-        .sahne-1-icerik::after { background: linear-gradient(to left, transparent, var(--yazi)); }
+        .kapak h1 { margin: 0; font-family: var(--font-isim); font-size: clamp(85px, 12vw, 140px); font-weight: 400; line-height: 1.1; letter-spacing: 2px; text-shadow: 0 4px 30px rgba(255,255,255,1); }
+        
+        /* GÜNCELLENEN & (AMPERSAND) İŞARETİ */
+        .kapak h1 .ampersand { 
+            display: inline-block; 
+            margin: 0 0.1em; 
+            font-family: var(--font-isim); 
+            font-size: 0.7em; 
+            color: var(--altin); 
+            font-weight: 400; 
+            transform: translateY(-0.05em); 
+        }
 
-        /* SAHNE 2: İSİMLER, SAYAÇ VE ADRES */
-        .sahne-2-ust-yazi { font-family: var(--font-isim); font-size: 42px; color: var(--yazi); margin-bottom: -15px; text-shadow: 0 2px 15px rgba(255,255,255,1); }
-        .kapak h1 { margin: 0; font-family: var(--font-isim); font-size: clamp(80px, 10vw, 130px); font-weight: 400; line-height: 1.1; letter-spacing: 2px; text-shadow: 0 4px 30px rgba(255,255,255,1); }
-        .kapak h1 .ampersand { display: inline-block; margin: 0 0.1em; font-family: var(--font-baslik); font-size: 0.55em; color: var(--altin); font-style: normal; font-weight: 400; transform: translateY(-0.15em); }
         .tarih { margin: 10px 0 25px; font-size: 16px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--yazi); text-shadow: 0 2px 15px rgba(255,255,255,1); font-family: var(--font-baslik); }
         
         /* KÜÇÜLTÜLMÜŞ SAYAÇ */
         .geri-sayim { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; max-width: 380px; margin: 0 auto 25px auto; }
         .sayac-kutusu { padding: 12px 5px; background-color: rgba(255, 255, 255, 0.85); border: 1px solid rgba(193, 161, 103, 0.3); border-radius: 10px; backdrop-filter: blur(8px); color: var(--yazi); box-shadow: 0 10px 25px rgba(78, 115, 84, 0.1); }
         .sayac-kutusu strong { display: block; font-family: var(--font-baslik); font-size: 24px; font-weight: 500; line-height: 1; }
-        .sayac-kutusu span { display: block; margin-top: 5px; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--gri); font-weight: 500; }
+        .sayac-kutusu span { display: block; margin-top: 5px; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--gri); font-weight: 500; font-family: var(--font-metin); }
 
         /* GENEL BÖLÜMLER */
         .bolum { padding: 100px 20px; overflow: hidden; }
         .bolum-krem { background-color: var(--krem); border-top: 1px solid rgba(193, 161, 103, 0.15); border-bottom: 1px solid rgba(193, 161, 103, 0.15); }
         .kapsayici { width: min(1120px, 100%); margin: 0 auto; }
         .bolum-basligi { margin: 0 0 15px; text-align: center; font-family: var(--font-baslik); font-size: clamp(36px, 5vw, 48px); font-weight: 500; line-height: 1.2; letter-spacing: 2px; color: var(--yazi); }
-        .bolum-aciklama { max-width: 690px; margin: 0 auto 60px; text-align: center; color: var(--gri); line-height: 1.9; font-size: 15px; }
-
-        /* YATAY KAYDIRMALI HİKAYEMİZ */
-        .zaman-cizgisi { display: flex; overflow-x: auto; gap: 20px; padding: 10px 20px 40px 20px; margin: 0; -ms-overflow-style: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-        .zaman-cizgisi::-webkit-scrollbar { display: none; }
-        .zaman-adimi { flex: 0 0 290px; display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
-        .polaroid-kart { width: 100%; background: white; padding: 14px 14px 25px; border: 1px solid rgba(193, 161, 103, 0.2); border-radius: 4px; box-shadow: 0 15px 35px rgba(78, 115, 84, 0.1); transition: transform 0.4s ease, box-shadow 0.4s ease; }
-        .zaman-adimi:nth-child(odd) .polaroid-kart { transform: rotate(-1.5deg); }
-        .zaman-adimi:nth-child(even) .polaroid-kart { transform: rotate(1.5deg); }
-        .polaroid-kart:hover { transform: translateY(-7px) rotate(0deg) !important; box-shadow: 0 25px 50px rgba(78, 115, 84, 0.15); }
-        .polaroid-fotograf { overflow: hidden; width: 100%; aspect-ratio: 4 / 5; background: #f0f0f0; }
-        .polaroid-fotograf img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.6s ease; }
-        .polaroid-kart:hover .polaroid-fotograf img { transform: scale(1.04); }
-        .polaroid-alt-yazi { padding: 17px 5px 0; text-align: center; font-family: var(--font-isim); font-size: 26px; color: var(--yazi); }
-        .zaman-dugum { position: relative; z-index: 3; width: 45px; height: 45px; border: 3px solid var(--acik-krem); border-radius: 50%; background-color: var(--altin); color: white; font-weight: 500; font-size: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(193, 161, 103, 0.4); font-family: var(--font-baslik); margin-top: -20px; margin-bottom: 15px; }
-        .zaman-bilgi { text-align: center; width: 100%; padding: 0 10px; }
-        .zaman-tarih { display: inline-block; margin-bottom: 12px; padding: 6px 14px; border: 1px solid rgba(193, 161, 103, 0.4); border-radius: 999px; color: var(--altin); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; }
-        .zaman-bilgi h3 { margin: 0 0 12px; font-family: var(--font-baslik); font-size: 28px; line-height: 1.1; color: var(--yazi); font-weight: 500; letter-spacing: 1px; }
-        .zaman-bilgi p { margin: 0; color: var(--gri); line-height: 1.8; font-size: 15px; }
+        .bolum-aciklama { max-width: 690px; margin: 0 auto 60px; text-align: center; color: var(--gri); line-height: 1.9; font-size: 16px; font-style: italic;}
 
         /* PROGRAM & MEKAN */
         .program-listesi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -141,7 +136,7 @@
         .form-karti { max-width: 720px; margin: auto; padding: 45px; background-color: white; border-radius: 16px; border: 1px solid rgba(193, 161, 103, 0.2); box-shadow: 0 20px 50px rgba(78, 115, 84, 0.08); }
         .form-satiri { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .form-alani { margin-bottom: 22px; }
-        .form-alani label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--yazi); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-alani label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--yazi); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-metin); }
         .form-alani input, .form-alani select, .form-alani textarea { width: 100%; padding: 15px; border: 1px solid #e3dbd1; border-radius: 8px; font: inherit; background-color: #fdfcf9; transition: all 0.3s ease; }
         .form-alani input:focus, .form-alani select:focus, .form-alani textarea:focus { outline: none; border-color: var(--altin); background-color: white; box-shadow: 0 0 0 3px rgba(193, 161, 103, 0.15); }
         .form-alani textarea { min-height: 120px; resize: vertical; }
@@ -151,8 +146,8 @@
         .gizli-alan { position: absolute; left: -9999px; }
 
         footer { padding: 60px 20px; text-align: center; color: white; background-color: var(--yazi); }
-        footer h2 { margin: 0 0 10px; font-family: var(--font-isim); font-size: 55px; font-weight: 400; color: var(--krem); line-height: 1; }
-        footer p { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+        footer h2 { margin: 0 0 10px; font-family: var(--font-isim); font-size: 65px; font-weight: 400; color: var(--krem); line-height: 1; }
+        footer p { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-family: var(--font-metin); }
 
         /* MOBİL UYARLAMALAR */
         @media (max-width: 750px) {
@@ -161,12 +156,11 @@
             
             .zarfi-ac-yazisi { font-size: 14px; bottom: 10%; }
             
-            .sahne-1-icerik { font-size: 55px; gap: 15px; top: 20%; }
-            .sahne-1-icerik::before, .sahne-1-icerik::after { width: 45px; }
+            .kapak h1 { font-size: clamp(75px, 18vw, 100px); white-space: normal; line-height: 0.9; margin-top: 5px; }
             
-            .sahne-2-ust-yazi { font-size: 32px; margin-bottom: -10px; }
-            .kapak h1 { font-size: clamp(60px, 15vw, 85px); white-space: normal; line-height: 1.1; margin-top: 5px; }
-            .kapak h1 .ampersand { display: block; margin: -5px 0; font-size: 0.5em; }
+            /* Mobilde Amperand Orantısı */
+            .kapak h1 .ampersand { display: block; margin: -5px 0 -5px 0; font-size: 0.8em; transform: none; line-height: 1; }
+
             .tarih { font-size: 14px; letter-spacing: 3px; margin: 15px 0 20px; }
             
             .geri-sayim { gap: 8px; max-width: 320px; margin-bottom: 25px; }
@@ -186,14 +180,6 @@
             .program-karti strong { font-size: 18px; }
             .program-karti h3 { font-size: 14px; margin-top: 6px; }
 
-            .zaman-cizgisi { gap: 12px; padding: 10px 15px 40px 15px; }
-            .zaman-adimi { flex: 0 0 65vw; } 
-            
-            .polaroid-alt-yazi { font-size: 22px; padding: 12px 5px 0; }
-            .zaman-bilgi { margin-top: 5px; padding-left: 5px; }
-            .zaman-bilgi h3 { font-size: 24px; margin-bottom: 6px; }
-            .zaman-bilgi p { font-size: 14px; line-height: 1.7; }
-
             .form-karti { padding: 25px 15px; }
         }
     </style>
@@ -209,7 +195,6 @@
 
     <!-- ZARF AÇILIŞ EKRANI -->
     <div class="acilis-ekrani" id="acilisEkrani">
-        <!-- Zarf Videosu (preload="auto" ve #t=0.001 ilk karenin mobil cihazlarda donuk kalmasını garantiler) -->
         <video id="zarfVideo" class="zarf-video" playsinline muted preload="auto">
             <source src="images/giris-zarf-2.mp4#t=0.001" type="video/mp4">
         </video>
@@ -228,15 +213,13 @@
         
         <div class="kapak-icerik">
             
-            <!-- SAHNE 1 -->
-            <div id="sahne1" class="sahne">
-                <div class="sahne-1-icerik">Evleniyoruz</div>
-            </div>
+            <!-- SAHNE 1: GİZLENDİ (Sadece Zarf Sonrası Bekleme Anı İçin JS Altyapısı Korundu) -->
+            <div id="sahne1" class="sahne"></div>
 
-            <!-- SAHNE 2 -->
+            <!-- SAHNE 2: İSİMLER, SAYAÇ VE ADRES -->
             <div id="sahne2" class="sahne">
-                <div class="sahne-2-ust-yazi">Evleniyoruz</div>
-                <h1>Abdülsamed <span class="ampersand">&amp;</span> Zeynep</h1>
+                
+                <h1>Zeynep <span class="ampersand">&amp;</span> Samed</h1>
                 <div class="tarih">6 Mart 2027 · Cumartesi</div>
                 
                 <div class="geri-sayim" id="geriSayim">
@@ -247,87 +230,17 @@
                 </div>
 
                 <div class="buton-grubu">
-                    <a class="buton" href="#mekan">Adres 📍</a>
+                    <a class="buton" href="#mekan">Adres Bilgisi 📍</a>
                 </div>
             </div>
 
         </div>
     </header>
 
-    <!-- HİKÂYEMİZ -->
-    <section class="bolum bolum-krem">
-        <div class="kapsayici">
-            <h2 class="bolum-basligi" data-aos="fade-up">Hikâyemiz</h2>
-            <p class="bolum-aciklama" data-aos="fade-up">İlk karşılaşmadan düğün günümüze uzanan yolculuğumuzun en özel anları.</p>
-
-            <div class="zaman-cizgisi">
-                <article class="zaman-adimi">
-                    <div class="polaroid-kart">
-                        <div class="polaroid-fotograf">
-                            <img src="images/tanisma.jpg" alt="Tanışma" loading="lazy">
-                        </div>
-                        <div class="polaroid-alt-yazi">Hikâyemizin başladığı gün</div>
-                    </div>
-                    <div class="zaman-dugum">01</div>
-                    <div class="zaman-bilgi">
-                        <span class="zaman-tarih">29 Eylül 2020</span>
-                        <h3>Tanıştık</h3>
-                        <p>Her şey güzel bir karşılaşmayla başladı. O gün, hayatımızın en özel hikâyesinin ilk sayfası oldu.</p>
-                    </div>
-                </article>
-
-                <article class="zaman-adimi">
-                    <div class="polaroid-kart">
-                        <div class="polaroid-fotograf">
-                            <img src="images/teklif.jpg" alt="Evlilik Teklifi" loading="lazy">
-                        </div>
-                        <div class="polaroid-alt-yazi">Geleceğe “evet” dediğimiz an</div>
-                    </div>
-                    <div class="zaman-dugum">02</div>
-                    <div class="zaman-bilgi">
-                        <span class="zaman-tarih">20 Haziran 2026</span>
-                        <h3>Evlilik Teklifi</h3>
-                        <p>Birlikte kurduğumuz hayallerin en anlamlı anlarından birinde geleceğe “evet” dedik.</p>
-                    </div>
-                </article>
-
-                <article class="zaman-adimi">
-                    <div class="polaroid-kart">
-                        <div class="polaroid-fotograf">
-                            <img src="images/nisan.jpg" alt="Nişan" loading="lazy">
-                        </div>
-                        <div class="polaroid-alt-yazi">Ailelerimizle paylaştığımız mutluluk</div>
-                    </div>
-                    <div class="zaman-dugum">03</div>
-                    <div class="zaman-bilgi">
-                        <span class="zaman-tarih">10 Temmuz 2026</span>
-                        <h3>Nişanlandık</h3>
-                        <p>Mutluluğumuzu ailelerimiz ve sevdiklerimizle paylaşarak düğün yolculuğumuza bir adım daha attık.</p>
-                    </div>
-                </article>
-
-                <article class="zaman-adimi">
-                    <div class="polaroid-kart">
-                        <div class="polaroid-fotograf">
-                            <img src="images/dugun-oncesi.jpg" alt="Düğün Öncesi" loading="lazy">
-                        </div>
-                        <div class="polaroid-alt-yazi">Hayatımızın en güzel gününe doğru</div>
-                    </div>
-                    <div class="zaman-dugum">04</div>
-                    <div class="zaman-bilgi">
-                        <span class="zaman-tarih">6 Mart 2027</span>
-                        <h3>Evleniyoruz</h3>
-                        <p>Şimdi hayatımızın en güzel gününe yaklaşırken mutluluğumuzu sizlerle paylaşmak için sabırsızlanıyoruz.</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- DÜĞÜN PROGRAMI -->
+    <!-- NİŞAN PROGRAMI -->
     <section class="bolum">
         <div class="kapsayici">
-            <h2 class="bolum-basligi" data-aos="fade-up">Düğün Programı</h2>
+            <h2 class="bolum-basligi" data-aos="fade-up">Nişan Programı</h2>
             <p class="bolum-aciklama" data-aos="fade-up">Bu özel gecede bizi bekleyen program.</p>
 
             <div class="program-listesi">
@@ -339,7 +252,7 @@
                 <article class="program-karti" data-aos="fade-up" data-aos-delay="100">
                     <span class="program-ikon">💍</span>
                     <strong>19.00</strong>
-                    <h3>Nikâh</h3>
+                    <h3>Yüzükler</h3>
                 </article>
                 <article class="program-karti" data-aos="fade-up" data-aos-delay="200">
                     <span class="program-ikon">🍽️</span>
@@ -358,28 +271,26 @@
     <!-- MEKÂN -->
     <section class="bolum bolum-krem" id="mekan">
         <div class="kapsayici">
-            <h2 class="bolum-basligi" data-aos="fade-up">Düğün Mekânı</h2>
+            <h2 class="bolum-basligi" data-aos="fade-up">Nişan Mekânı</h2>
             <p class="bolum-aciklama" data-aos="fade-up">Yol tarifi almak için aşağıdaki düğmeye basabilirsiniz.</p>
 
             <div class="mekan-karti" data-aos="zoom-in">
                 <div class="mekan-ikon">📍</div>
-                <h3>Yeşil Bahçe Davet Alanı</h3>
+                <h3>Nova Organizasyon Davet Evi</h3>
                 <p>6 Mart 2027 · Saat 19.00</p>
-                <p>Örnek Mahallesi<br>Düğün Sokak No:14<br>İstanbul</p>
-                <a class="buton" href="https://maps.google.com" target="_blank" rel="noopener">Google Maps'te Aç</a>
+                <a class="buton" href="https://maps.app.goo.gl/g8xoDUnGt5wtVPb26" target="_blank" rel="noopener">Haritada Aç</a>
             </div>
         </div>
     </section>
 
-    <!-- DAVETLİ KAMERASI -->
+    <!-- DAVETLİ KAMERASI (FİREBASE ENTEGRELİ ÇİFT BUTON) -->
     <section class="bolum" id="ani-yakala">
         <div class="kapsayici" style="text-align: center;">
             <h2 class="bolum-basligi" data-aos="fade-up">Sizin Gözünüzden Biz</h2>
             
             <p class="bolum-aciklama" data-aos="fade-up">
                 Bu geceyi bizimle paylaştığınız için çok mutluyuz! Masanızdaki anıları, 
-                eğlenceli kareleri ve yakaladığınız güzel anları dijital albümümüze 
-                yükleyerek mutluluğumuzu ölümsüzleştirebilirsiniz.
+                eğlenceli kareleri ve yakaladığınız güzel anları anında albümümüze yükleyebilirsiniz.
             </p>
 
             <div class="kamera-karti" data-aos="zoom-in">
@@ -388,22 +299,35 @@
                 <div style="padding: 35px 20px;">
                     <h3 style="font-family: var(--font-baslik); color: var(--yazi); font-size: 28px; margin: 0 0 20px; font-weight: 500;">Anıyı Yakala</h3>
                     
-                    <a class="buton" href="BURAYA_GOOGLE_PHOTOS_LINKI_GELECEK" target="_blank" rel="noopener" style="width: 100%; max-width: 250px;">
-                        Fotoğraf Yükle
-                    </a>
+                    <!-- GİZLİ DOSYA GİRDİLERİ -->
+                    <input type="file" accept="image/*" capture="environment" id="kameraGirdisi" style="display: none;">
+                    <input type="file" accept="image/*" id="galeriGirdisi" style="display: none;">
+                    
+                    <!-- KAMERA VE GALERİ İÇİN BUTONLAR -->
+                    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; justify-content: center; margin-top: 10px;">
+                        <button class="buton" id="fotoCekButonu" style="width: 100%; max-width: 250px; cursor: pointer; border: none; font-family: var(--font-baslik);">
+                            📸 Fotoğraf Çek
+                        </button>
+                        <button class="buton seffaf" id="fotoYukleButonu" style="width: 100%; max-width: 250px; cursor: pointer; font-family: var(--font-baslik);">
+                            🖼️ Galeriden Seç
+                        </button>
+                    </div>
+                    
+                    <!-- YÜKLEME MESAJI -->
+                    <p id="fotoMesaj" style="margin-top: 20px; font-size: 14px; font-weight: 500;"></p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- KATILIM FORMU -->
-    <section class="bolum" id="katilim">
+    <section class="bolum bolum-krem" id="katilim">
         <div class="kapsayici">
             <h2 class="bolum-basligi" data-aos="fade-up">Katılım Bildirimi</h2>
             <p class="bolum-aciklama" data-aos="fade-up">Katılım durumunuzu aşağıdaki form aracılığıyla bildirebilirsiniz.</p>
 
             <form class="form-karti" id="katilimFormu" action="https://formspree.io/f/xeeybnya" method="POST" data-aos="fade-up">
-                <input type="hidden" name="_subject" value="Abdülsamed ve Zeynep Düğün Katılım Cevabı">
+                <input type="hidden" name="_subject" value="Zeynep ve Samed Nişan Katılım Cevabı">
                 <div class="gizli-alan" aria-hidden="true">
                     <label for="website">Bu alanı boş bırakın</label>
                     <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
@@ -448,13 +372,86 @@
 
     <!-- SAYFA SONU -->
     <footer>
-        <h2>Abdülsamed & Zeynep</h2>
+        <h2>Zeynep & Samed</h2>
         <p>Sizi aramızda görmek için sabırsızlanıyoruz.</p>
         <p>6 Mart 2027</p>
     </footer>
 
     <!-- JAVASCRIPT KÜTÜPHANELERİ VE SCRIPTLER -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- FİREBASE SDK'LARI (Fotoğraf Yükleme İçin) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB06k_gS-PpokOab6nGFPKo-FGBXSmnZH4",
+            authDomain: "abdulsamed-zeynep-wedding.firebaseapp.com",
+            projectId: "abdulsamed-zeynep-wedding",
+            storageBucket: "abdulsamed-zeynep-wedding.firebasestorage.app",
+            messagingSenderId: "824468575238",
+            appId: "1:824468575238:web:91cd98bcbcf04aa8155f87"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+
+        const fotoCekButon = document.getElementById("fotoCekButonu");
+        const fotoYukleButon = document.getElementById("fotoYukleButonu");
+        const kameraInput = document.getElementById("kameraGirdisi");
+        const galeriInput = document.getElementById("galeriGirdisi");
+        const fotoMesaj = document.getElementById("fotoMesaj");
+
+        fotoCekButon.addEventListener("click", (e) => {
+            e.preventDefault();
+            kameraInput.click();
+        });
+
+        fotoYukleButon.addEventListener("click", (e) => {
+            e.preventDefault();
+            galeriInput.click();
+        });
+
+        async function dosyaYukle(e, buton) {
+            const dosya = e.target.files[0];
+            if (!dosya) return;
+
+            const eskiYazi = buton.innerHTML; 
+            buton.textContent = "Yükleniyor... ⏳";
+            
+            fotoCekButon.style.pointerEvents = "none";
+            fotoYukleButon.style.pointerEvents = "none";
+            fotoCekButon.style.opacity = "0.6";
+            fotoYukleButon.style.opacity = "0.6";
+            fotoMesaj.textContent = "";
+
+            try {
+                const dosyaAdi = Date.now() + "_" + Math.random().toString(36).substring(7) + ".jpg";
+                const storageRef = ref(storage, 'nisan_fotograflari/' + dosyaAdi);
+                
+                await uploadBytes(storageRef, dosya);
+                
+                fotoMesaj.textContent = "Harika! Fotoğraf albüme eklendi.";
+                fotoMesaj.style.color = "var(--yazi)";
+            } catch (hata) {
+                console.error("Firebase Yükleme Hatası:", hata);
+                fotoMesaj.textContent = "Yüklenirken bir sorun oluştu, lütfen internetini kontrol et.";
+                fotoMesaj.style.color = "var(--hata)";
+            } finally {
+                buton.innerHTML = eskiYazi;
+                fotoCekButon.style.pointerEvents = "auto";
+                fotoYukleButon.style.pointerEvents = "auto";
+                fotoCekButon.style.opacity = "1";
+                fotoYukleButon.style.opacity = "1";
+                e.target.value = ""; 
+            }
+        }
+
+        kameraInput.addEventListener("change", (e) => dosyaYukle(e, fotoCekButon));
+        galeriInput.addEventListener("change", (e) => dosyaYukle(e, fotoYukleButon));
+    </script>
+
     <script>
         AOS.init({ duration: 1000, once: true });
 
@@ -508,13 +505,10 @@
             if (zarfAcildiMi) return; 
             zarfAcildiMi = true;
             
-            // "Ekrana Tıklayınız" yazısını hemen yok et
             zarfYazisi.style.opacity = "0";
             
-            // Zarf açılış videosunu başlat
             zarfVideo.play().catch(e => console.log("Zarf video oynatılamadı:", e));
             
-            // Müzik çalmaya başlasın
             muzik.play().then(() => {
                 muzikButonu.classList.add("aktif");
                 muzikButonu.classList.add("caliyor");
@@ -522,23 +516,21 @@
             }).catch(e => console.log("Müzik otomatik başlatılamadı"));
         });
 
-        // Zarf videosu bitince ana siteye geçiş
         zarfVideo.addEventListener('ended', () => {
             acilisEkrani.classList.add("gizli");
             document.body.classList.remove("kilitli");
             window.scrollTo({ top: 0, behavior: 'instant' });
             
-            // Asıl arka plan videosunu başlat
             arkaplanVideo.play();
         });
 
         // GERİ SAYIM
-        const dugunTarihi = new Date("2027-03-06T19:00:00+03:00").getTime();
+        const nisanTarihi = new Date("2027-03-06T19:00:00+03:00").getTime();
         function geriSayimiGuncelle() {
             const simdi = new Date().getTime();
-            const kalanSure = dugunTarihi - simdi;
+            const kalanSure = nisanTarihi - simdi;
             if (kalanSure <= 0) {
-                document.getElementById("geriSayim").innerHTML = "<h2 style='grid-column: span 4; font-family: var(--font-baslik);'>Bugün evleniyoruz! 🎉</h2>";
+                document.getElementById("geriSayim").innerHTML = "<h2 style='grid-column: span 4; font-family: var(--font-baslik);'>Bugün nişanlanıyoruz! 🎉</h2>";
                 return;
             }
             document.getElementById("gun").textContent = Math.floor(kalanSure / (1000 * 60 * 60 * 24));
