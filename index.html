@@ -37,7 +37,7 @@
         body { margin: 0; font-family: var(--font-metin); background: linear-gradient(180deg, #ffffff 0%, #fcfaf7 100%); color: var(--yazi); line-height: 1.8; font-weight: 400; }
         body.kilitli { overflow: hidden; }
 
-        /* ZARF AÇILIŞ EKRANI (TAMAMEN YAZISIZ) */
+        /* ZARF AÇILIŞ EKRANI */
         .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: #fcf6f5; transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer; }
         .acilis-ekrani.gizli { opacity: 0; visibility: hidden; pointer-events: none; }
         
@@ -46,7 +46,6 @@
         /* BUTONLAR */
         .buton { display: inline-block; padding: 14px 32px; border: none; border-radius: 999px; background-color: var(--koyu-bordo); color: white; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-metin); }
         .buton:hover { transform: translateY(-2px); background-color: var(--altin); box-shadow: 0 10px 20px rgba(193, 161, 103, 0.25); }
-        .buton:disabled { opacity: 0.65; cursor: wait; transform: none; }
         
         .buton.seffaf { background-color: transparent; border: 1px solid var(--koyu-bordo); color: var(--koyu-bordo); }
         .buton.seffaf:hover { background-color: var(--koyu-bordo); color: white; }
@@ -86,7 +85,7 @@
         .tarih { margin: 10px 0 25px; font-size: 16px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--koyu-bordo); text-shadow: 0 2px 15px rgba(255,255,255,1); font-family: var(--font-baslik); }
         .davet-metni { max-width: 720px; margin: 0 auto 31px; font-size: 17px; line-height: 2; letter-spacing: 0.3px; color: var(--koyu-bordo); font-weight: 400; text-shadow: 0 2px 15px rgba(255,255,255,1); font-style: italic; }
 
-        /* YUVARLAK SAYAÇ TASARIMI */
+        /* SAYAÇ TASARIMI */
         .geri-sayim { display: flex; justify-content: center; gap: 15px; width: 100%; max-width: 450px; margin: 0 auto 30px auto; }
         .sayac-kutusu { width: 85px; height: 85px; border-radius: 50%; background-color: rgba(251, 249, 246, 0.9); border: 1px solid rgba(194, 167, 112, 0.4); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
         .sayac-kutusu strong { display: block; font-family: var(--font-baslik); font-size: 28px; font-weight: 500; color: var(--koyu-bordo); line-height: 1; }
@@ -106,27 +105,14 @@
         .program-karti strong { display: block; color: var(--altin); font-size: 26px; font-family: var(--font-baslik); font-weight: 400; margin-bottom: 8px;}
         .program-karti h3 { margin: 0; font-family: var(--font-metin); color: var(--koyu-bordo); font-weight: 400; font-size: 16px; letter-spacing: 2px; text-transform: uppercase;}
 
+        /* MEKAN VE KAMERA */
         .mekan-karti { max-width: 800px; margin: auto; padding: 40px 30px; text-align: center; color: var(--koyu-bordo); background-color: white; border-radius: 16px; border: 1px solid rgba(194, 167, 112, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.06); }
         .mekan-karti .mekan-ikon { font-size: 42px; margin-bottom: 10px; }
         .mekan-karti h3 { margin: 10px 0; font-family: var(--font-baslik); font-size: 32px; font-weight: 500; letter-spacing: 1px; }
         .mekan-karti p { margin-bottom: 25px; font-size: 16px; color: var(--gri); }
 
-        /* DAVETLİ KAMERASI */
         .kamera-karti { background-color: white; border: 1px solid rgba(194, 167, 112, 0.15); border-radius: 16px; max-width: 500px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.05); overflow: hidden; }
         
-        /* KATILIM FORMU */
-        .form-karti { max-width: 720px; margin: auto; padding: 45px; background-color: white; border-radius: 16px; border: 1px solid rgba(194, 167, 112, 0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .form-satiri { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .form-alani { margin-bottom: 22px; }
-        .form-alani label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--koyu-bordo); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-metin); }
-        .form-alani input, .form-alani select, .form-alani textarea { width: 100%; padding: 15px; border: 1px solid #e8e3dc; border-radius: 8px; font: inherit; background-color: #fbf9f6; transition: all 0.3s ease; }
-        .form-alani input:focus, .form-alani select:focus, .form-alani textarea:focus { outline: none; border-color: var(--altin); background-color: white; box-shadow: 0 0 0 3px rgba(194, 167, 112, 0.1); }
-        .form-alani textarea { min-height: 120px; resize: vertical; }
-        .form-mesaji { margin: 18px 0 0; font-weight: 500; }
-        .form-mesaji.basarili { color: var(--bordo); }
-        .form-mesaji.hatali { color: var(--hata); }
-        .gizli-alan { position: absolute; left: -9999px; }
-
         footer { padding: 60px 20px; text-align: center; color: white; background-color: var(--koyu-bordo); }
         footer h2 { margin: 0 0 10px; font-family: var(--font-isim); font-size: clamp(35px, 8vw, 65px); font-weight: 400; color: var(--krem); line-height: 1; white-space: nowrap; }
         footer p { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-family: var(--font-metin); }
@@ -143,25 +129,24 @@
 
             .tarih { font-size: 14px; letter-spacing: 3px; margin: 15px 0 25px; }
             
-            /* SAYAÇ MOBİL UYUMU */
             .geri-sayim { gap: 10px; margin-bottom: 30px; }
             .sayac-kutusu { width: 65px; height: 65px; }
             .sayac-kutusu strong { font-size: 20px; }
             .sayac-kutusu span { font-size: 8px; margin-top: 2px; }
             
             .buton-grubu { margin-bottom: 10px; }
-            .form-satiri { grid-template-columns: 1fr; gap: 0; }
-            .program-listesi { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            
+            /* PROGRAM MOBİLDE DİKEY ŞIK LİSTE */
+            .program-listesi { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+            .program-karti { width: 100%; max-width: 320px; display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 15px 0; border-bottom: 1px solid rgba(194, 167, 112, 0.2); }
+            .program-karti:hover { transform: none; }
+            .program-karti::after { display: none; } 
+            .program-karti strong { font-size: 22px; margin: 0; width: 45%; text-align: right; padding-right: 20px; border-right: 1px solid var(--altin); }
+            .program-karti h3 { font-size: 13px; letter-spacing: 1px; width: 55%; text-align: left; padding-left: 20px; line-height: 1.4; margin: 0;}
         }
 
         @media (max-width: 430px) {
-            .program-listesi { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .program-karti { padding: 15px 5px; }
-            .program-karti strong { font-size: 20px; }
-            .program-karti h3 { font-size: 11px; letter-spacing: 1px; }
-            
             .mekan-karti { padding: 30px 15px; }
-            .form-karti { padding: 25px 15px; }
         }
     </style>
 </head>
@@ -175,14 +160,15 @@
 
     <div class="acilis-ekrani" id="acilisEkrani">
         <video id="zarfVideo" class="zarf-video" playsinline muted preload="auto">
-            <source src="images/giris-zarf-1.mp4#t=0.001" type="video/mp4">
+            <source src="images/giris-zarf-2.mp4" type="video/mp4">
         </video>
     </div>
 
     <header class="kapak" id="anaKapak">
-        <video id="arkaplanVideo" muted playsinline loop class="arkaplan-video" preload="auto">
-            <source src="images/arkaplan-2.mp4" type="video/mp4">
+        <video id="arkaplanVideo" autoplay muted playsinline loop class="arkaplan-video" preload="auto">
+            <source src="images/arkaplan2.mp4" type="video/mp4">
         </video>
+        
         <div class="video-overlay"></div>
         
         <div class="kapak-icerik">
@@ -291,55 +277,6 @@
         </div>
     </section>
 
-    <section class="bolum" id="katilim">
-        <div class="kapsayici">
-            <h2 class="bolum-basligi" data-aos="fade-up">Katılım Bildirimi</h2>
-            <p class="bolum-aciklama" data-aos="fade-up">Katılım durumunuzu aşağıdaki form aracılığıyla bildirebilirsiniz.</p>
-
-            <form class="form-karti" id="katilimFormu" action="https://formspree.io/f/xeeybnya" method="POST" data-aos="fade-up">
-                <input type="hidden" name="_subject" value="Zeynep ve Samed Nişan Katılım Cevabı">
-                <div class="gizli-alan" aria-hidden="true">
-                    <label for="website">Bu alanı boş bırakın</label>
-                    <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
-                </div>
-
-                <div class="form-satiri">
-                    <div class="form-alani">
-                        <label for="isim">Adınız ve soyadınız</label>
-                        <input type="text" id="isim" name="Ad Soyad" placeholder="Adınız ve soyadınız" required>
-                    </div>
-                    <div class="form-alani">
-                        <label for="durum">Katılacak mısınız?</label>
-                        <select id="durum" name="Katılım Durumu" required>
-                            <option value="">Seçiniz</option>
-                            <option value="Evet, katılacağım">Evet, katılacağım</option>
-                            <option value="Maalesef katılamayacağım">Maalesef katılamayacağım</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-satiri">
-                    <div class="form-alani">
-                        <label for="kisiSayisi">Katılımcı sayısı</label>
-                        <input type="number" id="kisiSayisi" name="Katılımcı Sayısı" min="1" max="10" value="1" required>
-                    </div>
-                    <div class="form-alani">
-                        <label for="sarki">Şarkı isteğiniz</label>
-                        <input type="text" id="sarki" name="Şarkı İsteği" placeholder="Sanatçı ve şarkı adı">
-                    </div>
-                </div>
-
-                <div class="form-alani">
-                    <label for="mesaj">Çifte mesajınız</label>
-                    <textarea id="mesaj" name="Çifte Mesaj" placeholder="Güzel dileklerinizi buraya yazabilirsiniz..."></textarea>
-                </div>
-
-                <button class="buton" id="gonderButonu" type="submit">Cevabımı Gönder</button>
-                <p class="form-mesaji" id="formMesaji" role="status" aria-live="polite"></p>
-            </form>
-        </div>
-    </section>
-
     <footer>
         <h2>Zeynep & Samed</h2>
         <p>Sizi aramızda görmek için sabırsızlanıyoruz.</p>
@@ -439,7 +376,6 @@
             caliyorMu = !caliyorMu;
         });
 
-        // KURŞUN GEÇİRMEZ ZARF AÇILIŞ MANTIĞI
         const acilisEkrani = document.getElementById("acilisEkrani");
         const zarfVideo = document.getElementById("zarfVideo");
         const arkaplanVideo = document.getElementById('arkaplanVideo');
@@ -462,28 +398,21 @@
             zarfAcildiMi = true;
 
             muzik.play().then(() => {
-                muzikButonu.classList.add("aktif");
-                muzikButonu.classList.add("caliyor");
+                muzikButonu.classList.add("aktif", "caliyor");
                 caliyorMu = true;
             }).catch(e => console.log("Müzik hatası"));
-            
-            if (zarfVideo.readyState === 0) {
-                console.log("Video dosyası bulunamadı veya yüklenemedi, direkt geçiliyor!");
-                siteyiAc();
-                return;
-            }
             
             const playPromise = zarfVideo.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    const videoSuresi = (zarfVideo.duration || 5) * 1000;
-                    setTimeout(siteyiAc, videoSuresi + 1000);
+                    // Video sorunsuz oynadı, normal bitmesini bekleyecek (ya da alttaki garanti süre devreye girecek)
                 }).catch(e => {
+                    console.log("Zarf videosu oynatılamadı, direkt geçiliyor:", e);
                     siteyiAc();
                 });
             } else {
-                setTimeout(siteyiAc, 2000);
+                siteyiAc();
             }
         });
 
@@ -506,47 +435,6 @@
         }
         geriSayimiGuncelle();
         setInterval(geriSayimiGuncelle, 1000);
-
-        // FORM GÖNDERİMİ
-        const katilimFormu = document.getElementById("katilimFormu");
-        const formMesaji = document.getElementById("formMesaji");
-        const gonderButonu = document.getElementById("gonderButonu");
-
-        katilimFormu.addEventListener("submit", async function (olay) {
-            olay.preventDefault();
-            formMesaji.textContent = "";
-            formMesaji.className = "form-mesaji";
-            const eskiButonYazisi = gonderButonu.textContent;
-            gonderButonu.disabled = true;
-            gonderButonu.textContent = "Gönderiliyor...";
-
-            try {
-                const formVerileri = new FormData(katilimFormu);
-                const cevap = await fetch(katilimFormu.action, {
-                    method: katilimFormu.method,
-                    body: formVerileri,
-                    headers: { "Accept": "application/json" }
-                });
-
-                if (!cevap.ok) throw new Error("Form gönderilemedi.");
-
-                const isim = document.getElementById("isim").value.trim();
-                const durum = document.getElementById("durum").value;
-
-                formMesaji.textContent = (durum === "Evet, katılacağım") 
-                    ? "Teşekkürler " + isim + "! Cevabınız alındı. Sizi aramızda görmek için sabırsızlanıyoruz." 
-                    : "Teşekkürler " + isim + ". Cevabınız başarıyla alındı.";
-                
-                formMesaji.classList.add("basarili");
-                katilimFormu.reset();
-            } catch (hata) {
-                formMesaji.textContent = "Cevabınız gönderilemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.";
-                formMesaji.classList.add("hatali");
-            } finally {
-                gonderButonu.disabled = false;
-                gonderButonu.textContent = eskiButonYazisi;
-            }
-        });
     </script>
 </body>
 </html>
