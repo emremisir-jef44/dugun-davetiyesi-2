@@ -37,16 +37,15 @@
         body { margin: 0; font-family: var(--font-metin); background: linear-gradient(180deg, #ffffff 0%, #fcfaf7 100%); color: var(--yazi); line-height: 1.8; font-weight: 400; }
         body.kilitli { overflow: hidden; }
 
-        /* ZARF AÇILIŞ EKRANI (Arka plan şeffaf yapıldı, video görünür kılındı) */
-        .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: transparent; transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer; }
+        /* ZARF AÇILIŞ EKRANI */
+        .acilis-ekrani { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background-color: #fcf6f5; transition: opacity 1.2s ease, visibility 1.2s ease; cursor: pointer; }
         .acilis-ekrani.gizli { opacity: 0; visibility: hidden; pointer-events: none; }
         
-        .zarf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .zarf-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
         /* BUTONLAR */
         .buton { display: inline-block; padding: 14px 32px; border: none; border-radius: 999px; background-color: var(--koyu-bordo); color: white; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-metin); }
         .buton:hover { transform: translateY(-2px); background-color: var(--altin); box-shadow: 0 10px 20px rgba(193, 161, 103, 0.25); }
-        .buton:disabled { opacity: 0.65; cursor: wait; transform: none; }
         
         .buton.seffaf { background-color: transparent; border: 1px solid var(--koyu-bordo); color: var(--koyu-bordo); }
         .buton.seffaf:hover { background-color: var(--koyu-bordo); color: white; }
@@ -87,10 +86,10 @@
         .davet-metni { max-width: 720px; margin: 0 auto 31px; font-size: 17px; line-height: 2; letter-spacing: 0.3px; color: var(--koyu-bordo); font-weight: 400; text-shadow: 0 2px 15px rgba(255,255,255,1); font-style: italic; }
 
         /* SAYAÇ TASARIMI */
-        .geri-sayim { display: flex; justify-content: center; gap: 15px; width: 100%; max-width: 450px; margin: 0 auto 30px auto; flex-wrap: nowrap; }
-        .sayac-kutusu { width: 85px; height: 85px; border-radius: 50%; background-color: rgba(251, 249, 246, 0.9); border: 1px solid rgba(194, 167, 112, 0.4); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 0; }
-        .sayac-kutusu strong { display: block; font-family: var(--font-baslik); font-size: 32px; font-weight: 500; color: var(--koyu-bordo); line-height: 1; margin-bottom: 2px; }
-        .sayac-kutusu span { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--altin); font-weight: 600; font-family: var(--font-metin); }
+        .geri-sayim { display: flex; justify-content: center; gap: 15px; width: 100%; max-width: 450px; margin: 0 auto 30px auto; }
+        .sayac-kutusu { width: 85px; height: 85px; border-radius: 50%; background-color: rgba(251, 249, 246, 0.9); border: 1px solid rgba(194, 167, 112, 0.4); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .sayac-kutusu strong { display: block; font-family: var(--font-baslik); font-size: 28px; font-weight: 500; color: var(--koyu-bordo); line-height: 1; }
+        .sayac-kutusu span { display: block; margin-top: 4px; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--altin); font-weight: 600; font-family: var(--font-metin); }
 
         /* GENEL BÖLÜMLER */
         .bolum { padding: 100px 20px; overflow: hidden; background-color: var(--acik-krem); }
@@ -101,11 +100,10 @@
 
         /* EMOJİSİZ, SADE VE ŞIK PROGRAM TASARIMI */
         .program-listesi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .program-karti { padding: 20px 15px; text-align: center; position: relative; transition: transform 0.3s ease; }
-        .program-karti:hover { transform: translateY(-3px); }
-        .program-karti::after { content: ''; position: absolute; bottom: 0; left: 30%; right: 30%; height: 1px; background: rgba(194, 167, 112, 0.4); }
-        .program-karti strong { display: block; color: var(--altin); font-size: 28px; font-family: var(--font-baslik); font-weight: 400; margin-bottom: 8px;}
-        .program-karti h3 { margin: 0; font-family: var(--font-metin); color: var(--koyu-bordo); font-weight: 400; font-size: 15px; letter-spacing: 2px; text-transform: uppercase;}
+        .program-karti { padding: 25px 15px; text-align: center; border-bottom: 1px solid rgba(194, 167, 112, 0.2); transition: transform 0.3s ease; }
+        .program-karti:hover { transform: translateY(-5px); }
+        .program-karti strong { display: block; color: var(--altin); font-size: 26px; font-family: var(--font-baslik); font-weight: 400; margin-bottom: 8px;}
+        .program-karti h3 { margin: 0; font-family: var(--font-metin); color: var(--koyu-bordo); font-weight: 400; font-size: 16px; letter-spacing: 2px; text-transform: uppercase;}
 
         /* MEKAN VE KAMERA */
         .mekan-karti { max-width: 800px; margin: auto; padding: 40px 30px; text-align: center; color: var(--koyu-bordo); background-color: white; border-radius: 16px; border: 1px solid rgba(194, 167, 112, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.06); }
@@ -138,6 +136,7 @@
             
             .buton-grubu { margin-bottom: 10px; }
             
+            /* PROGRAM MOBİLDE DİKEY ŞIK LİSTE */
             .program-listesi { display: flex; flex-direction: column; gap: 10px; align-items: center; }
             .program-karti { width: 100%; max-width: 320px; display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 15px 0; border-bottom: 1px solid rgba(194, 167, 112, 0.2); }
             .program-karti:hover { transform: none; }
@@ -160,15 +159,16 @@
     </audio>
 
     <div class="acilis-ekrani" id="acilisEkrani">
-        <video id="zarfVideo" class="zarf-video" playsinline muted preload="metadata">
-            <source src="images/giris-zarf-1.mp4#t=0.001" type="video/mp4">
+        <video id="zarfVideo" class="zarf-video" playsinline muted preload="auto">
+            <source src="images/giris-zarf-2.mp4" type="video/mp4">
         </video>
     </div>
 
     <header class="kapak" id="anaKapak">
         <video id="arkaplanVideo" autoplay muted playsinline loop class="arkaplan-video" preload="auto">
-            <source src="images/arkaplan-2.mp4" type="video/mp4">
+            <source src="images/arkaplan2.mp4" type="video/mp4">
         </video>
+        
         <div class="video-overlay"></div>
         
         <div class="kapak-icerik">
@@ -376,7 +376,6 @@
             caliyorMu = !caliyorMu;
         });
 
-        // ZARF AÇILIŞ MANTIĞI
         const acilisEkrani = document.getElementById("acilisEkrani");
         const zarfVideo = document.getElementById("zarfVideo");
         const arkaplanVideo = document.getElementById('arkaplanVideo');
@@ -399,28 +398,21 @@
             zarfAcildiMi = true;
 
             muzik.play().then(() => {
-                muzikButonu.classList.add("aktif");
-                muzikButonu.classList.add("caliyor");
+                muzikButonu.classList.add("aktif", "caliyor");
                 caliyorMu = true;
             }).catch(e => console.log("Müzik hatası"));
-            
-            if (zarfVideo.readyState === 0) {
-                console.log("Video dosyası bulunamadı, direkt geçiliyor!");
-                siteyiAc();
-                return;
-            }
             
             const playPromise = zarfVideo.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    const videoSuresi = (zarfVideo.duration || 5) * 1000;
-                    setTimeout(siteyiAc, videoSuresi + 1000);
+                    // Video sorunsuz oynadı, normal bitmesini bekleyecek (ya da alttaki garanti süre devreye girecek)
                 }).catch(e => {
+                    console.log("Zarf videosu oynatılamadı, direkt geçiliyor:", e);
                     siteyiAc();
                 });
             } else {
-                setTimeout(siteyiAc, 2000);
+                siteyiAc();
             }
         });
 
